@@ -3,10 +3,12 @@ import { log } from 'console';
 import LoginForm from './LoginForm.vue';
 import { login, getLoggedUser } from './store';
 import { ref } from 'vue';
+import Me from './Me.vue';
+import Logout from './Logout.vue';
 
 const newCredentials = ref({ email: "", password: "" })
 const enter = async (credentials: any) => {
-    console.log(credentials);
+    //console.log(credentials);
     await login(credentials);
 
 }
@@ -16,5 +18,6 @@ const enter = async (credentials: any) => {
 <template>
     <h1>Hello World!</h1>
     <LoginForm :credentials="newCredentials" @credentials-submit="enter"></LoginForm>
-    {{ getLoggedUser() }}
+    <Me></Me>
+    <Logout></Logout>
 </template>
