@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { log } from 'console';
 import LoginForm from './LoginForm.vue';
-import { login, getLoggedUser } from './store';
+//import { login, getLoggedUser } from './store';
+import { login } from './services/auth/index';
 import { ref } from 'vue';
 import Me from './Me.vue';
 import Logout from './Logout.vue';
@@ -24,6 +25,7 @@ const enter = async (credentials: any) => {
     <RouterView />
     <h1>Hello World!</h1>
     <LoginForm :credentials="newCredentials" @credentials-submit="enter"></LoginForm>
-    <Me></Me>
     <Logout></Logout>
+    <Me></Me>
+   
 </template>

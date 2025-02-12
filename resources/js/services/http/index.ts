@@ -1,33 +1,69 @@
-// AXIOS FACADE
+import type {RequestMiddleware, ResponseErrorMiddleware, ResponseMiddleware} from './types';
+import type {AxiosRequestConfig} from 'axios';
 
-import axios from "axios";
+import axios from 'axios';
 
-// We use a "baseURL" so we don't have to put /api in front of everything
-const baseURL = "/api";
+const baseURL = '/api';
 
 const http = axios.create({
     baseURL,
+    withCredentials: false,
     headers: {
-        // With this header you indicate what type of content you expect to get back from the server.
-        Accept: "application/json",
-        // This header indicates in which format the body of the request was sent to the server.
-        "Content-Type": "application/json",
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Accept: 'application/json',
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        'Content-Type': 'application/json',
     },
 });
+
+const requestMiddleware: RequestMiddleware[] = [];
+const responseMiddleware: ResponseMiddleware[] = [];
+const responseErrorMiddleware: ResponseErrorMiddleware[] = [];
+
+http.interceptors.request.use(request => {
+    for (const middleware of requestMiddleware) middleware(request);
+
+    return request;
+});
+
+http.interceptors.response.use(
+    response => {
+        for (const middleware of responseMiddleware) middleware(response);
+
+        return response;
+    },
+    // eslint-disable-next-line promise/prefer-await-to-callbacks
+    error => {
+        if (!error.response) return Promise.reject(error);
+        for (const middleware of responseErrorMiddleware) middleware(error);
+
+        return Promise.reject(error);
+    },
+);
 
 /**
  * send a get request to the given endpoint
  */
-export const getRequest = (endpoint: string) => http.get(endpoint);
+export const getRequest = (endpoint: string, options?: AxiosRequestConfig) => http.get(endpoint, options);
 
 /**
- * send a post/put/delete request to the given endpoint with the given data
+ * send a post request to the given endpoint with the given data
  */
-export const postRequest = (endpoint: string, data: any) =>
-    http.post(endpoint, data);
+export const postRequest = (endpoint: string, data: unknown, options?: AxiosRequestConfig) =>
+    http.post(endpoint, data, options);
 
-export const updateRequest = (endpoint: string, data: any) =>
-    http.put(endpoint, data);
+/**
+ * send a put request to the given endpoint with the given data
+ */
+export const putRequest = (endpoint: string, data: unknown) => http.put(endpoint, data);
 
-export const deleteRequest = (endpoint: string, data: any) =>
-    http.delete(endpoint, data);
+/**
+ * send a delete request to the given endpoint
+ */
+export const deleteRequest = (endpoint: string) => http.delete(endpoint);
+
+export const registerRequestMiddleware = (middlewareFunc: RequestMiddleware) => requestMiddleware.push(middlewareFunc);
+export const registerResponseMiddleware = (middlewareFunc: ResponseMiddleware) =>
+    responseMiddleware.push(middlewareFunc);
+export const registerResponseErrorMiddleware = (middlewareFunc: ResponseErrorMiddleware) =>
+    responseErrorMiddleware.push(middlewareFunc);

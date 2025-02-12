@@ -1,12 +1,16 @@
-import "./bootstrap";
 
 import { createApp } from "vue";
 import App from "./App.vue";
 import { ticketRoutes } from "./domains/tickets/routes";
-import { addRoutes, router } from "./services/router";
+import { userRoutes } from "./domains/users/routes";
+import { addRoutes } from "./services/router";
+import { useRouterInApp } from "./services/router/index";
 
 const app = createApp(App);
 
 addRoutes(ticketRoutes);
-app.use(router);
+addRoutes(userRoutes);
+
+useRouterInApp(app);
+//app.use(router);
 app.mount("#app");

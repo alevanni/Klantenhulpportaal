@@ -1,6 +1,6 @@
--   Only one category per ticket?
--   Can normal users post comments?
+-   Only one category per ticket? Multiple
+-   Can normal users post comments? Yes
 -   What is the difference between notes and comments? Only who sees them?
--   Do i need the timestamps on everything?
--   Where do i put the store for the login?
+-   Do i need the timestamps on everything? yes
+-   Where do i put the store for the login? AuthController?
 -   If you are having trouble authenticating with your application from an SPA that executes on a separate subdomain, what does that mean??

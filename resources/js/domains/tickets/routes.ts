@@ -1,12 +1,11 @@
-import TicketsOverview from "./pages/TicketsOverview.vue";
-import CreateTicket from "./pages/CreateTicket.vue";
-import EditTicket from "./pages/EditTicket.vue";
-import ViewTicket from "./pages/ViewTicket.vue";
+import Overview from "./pages/Overview.vue";
+import Create from "./pages/Create.vue";
+import Edit from "./pages/Edit.vue";
+import View from "./pages/Ticket.vue";
 
 export const ticketRoutes = [
-    { path: "/tickets", name: "tickets", component: TicketsOverview },
-    { path: "/tickets/create", name: "createTicket", component: CreateTicket },
-    { path: "/tickets/edit/:id", name: "editTicket", component: EditTicket },
-
-    { path: "/tickets/view/:id", name: "viewTicket", component: ViewTicket },
+    { path: "/tickets", name: "tickets", component: Overview },
+    { path: "/tickets/create", name: "createTicket", component: Create },
+    { path: "/tickets/edit/:id", name: "editTicket", component: Edit },
+    { path: "/tickets/view/:id", name: "viewTicket", component: View },
 ];

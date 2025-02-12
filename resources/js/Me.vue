@@ -1,16 +1,23 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { getLoggedUser, getUser } from './store';
 
-const logged = ref({});
+import {checkIfLoggedIn, getLoggedInUser, isLoggedIn} from './services/auth/index';
 
+isLoggedIn;
 const updateInfo = async () => {
-    getLoggedUser();
-    logged.value=getUser();
+    await checkIfLoggedIn();
+    /*
+    console.log(getLoggedInUser());
+    if ( isLoggedIn.value ) {
+        console.log(isLoggedIn.value);
+        getLoggedInUser();
+    }
+    */
 }
+
+
 </script>
 
 <template>
     <button @click="updateInfo">Get the logged user</button>
-    {{ logged }}
+   <p v-if="isLoggedIn">{{ getLoggedInUser() }}</p>
 </template>
