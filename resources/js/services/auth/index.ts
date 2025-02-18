@@ -5,37 +5,47 @@ import type {
     RegisterData,
     ResetPasswordData,
     ResponseErrorMiddleware,
-} from './types';
-import type { Component } from 'vue';
-import type { NavigationGuard } from 'vue-router';
+} from "./types";
+import type { Component } from "vue";
+import type { NavigationGuard } from "vue-router";
 
-import { USER_DOMAIN_NAME } from './../../domains/users/routes';
-import { computed, ref } from 'vue';
+import { USER_DOMAIN_NAME } from "./../../domains/users/routes";
+import { computed, ref } from "vue";
 
-import { getRequest, postRequest, registerResponseErrorMiddleware } from './../http';
-import { addRoutes, goToRoute, registerBeforeRouteMiddleware } from './../router';
-import { clearStorage } from './../storage';
-import { successToast } from './../toast';
+import {
+    getRequest,
+    postRequest,
+    registerResponseErrorMiddleware,
+} from "./../http";
+import {
+    addRoutes,
+    goToRoute,
+    registerBeforeRouteMiddleware,
+} from "./../router";
+import { clearStorage } from "./../storage";
+import { successToast } from "./../toast";
 
-export const LOGIN_ROUTE_NAME = 'Login';
-export const FORGOT_PASSWORD_ROUTE_NAME = 'ForgotPassword';
-export const RESET_PASSWORD_ROUTE_NAME = 'ResetPassword';
-export const REGISTER_ROUTE_NAME = 'Register';
+export const LOGIN_ROUTE_NAME = "Login";
+export const FORGOT_PASSWORD_ROUTE_NAME = "ForgotPassword";
+export const RESET_PASSWORD_ROUTE_NAME = "ResetPassword";
+export const REGISTER_ROUTE_NAME = "Register";
 
-const apiLoginRoute = '/login';
-const apiLogoutRoute = '/logout';
-const apiLoggedInCheckRoute = '/me';
-const apiSendResetPasswordEmailRoute = '/send-reset-password-email';
-const apiResetpasswordRoute = '/reset-password';
+const apiLoginRoute = "/login";
+const apiLogoutRoute = "/logout";
+const apiLoggedInCheckRoute = "/me";
+const apiSendResetPasswordEmailRoute = "/send-reset-password-email";
+const apiResetpasswordRoute = "/reset-password";
 
-const goToDefaultLoggedInPage = () => goToRoute('tickets');
+const goToDefaultLoggedInPage = () => goToRoute("tickets.overview");
 
-export const goToLoginPage = (from?: string) => goToRoute(LOGIN_ROUTE_NAME, undefined, { from });
+export const goToLoginPage = (from?: string) =>
+    goToRoute(LOGIN_ROUTE_NAME, undefined, { from });
 
 const loggedInUser = ref<LoggedInUser | undefined>();
 
 export const getLoggedInUser = () => {
-    if (!loggedInUser.value) throw Error("Can't call getLoggedInUser when not logged in");
+    if (!loggedInUser.value)
+        throw Error("Can't call getLoggedInUser when not logged in");
 
     return loggedInUser.value;
 };
@@ -49,7 +59,7 @@ const onLocation = ref(true);
 export const isOnLocation = computed(() => onLocation.value);
 
 export const checkLocation = async () => {
-    const { data } = await getRequest('location');
+    const { data } = await getRequest("location");
     onLocation.value = data.location;
 };
 
@@ -106,7 +116,7 @@ export const login = async (credentials: LoginCredentials) => {
 };
 
 export const guestLogin = async () => {
-    const response = await getRequest('guestLogin');
+    const response = await getRequest("guestLogin");
 
     setLoggedInAndUser(response.data.user);
     goToDefaultLoggedInPage();
@@ -129,9 +139,11 @@ export const checkIfLoggedIn = async () => {
 };
 
 export const sendResetPasswordEmail = async (email: string) => {
-    const response = await postRequest(apiSendResetPasswordEmailRoute, { email });
+    const response = await postRequest(apiSendResetPasswordEmailRoute, {
+        email,
+    });
 
-    successToast('Er is een email verstuurd om uw wachtwoord te resetten');
+    successToast("Er is een email verstuurd om uw wachtwoord te resetten");
 
     goToLoginPage();
 
@@ -147,9 +159,9 @@ export const resetPassword = async (data: ResetPasswordData) => {
 };
 
 export const register = async (data: RegisterData) => {
-    const response = await postRequest('register', data);
+    const response = await postRequest("register", data);
 
-    successToast('Je bent succesvol geregistreerd');
+    successToast("Je bent succesvol geregistreerd");
 
     goToLoginPage();
 
@@ -157,9 +169,9 @@ export const register = async (data: RegisterData) => {
 };
 
 export const registerWithToken = async (data: RegisterData) => {
-    const response = await postRequest('register-token', data);
+    const response = await postRequest("register-token", data);
 
-    successToast('Je bent succesvol geregistreerd');
+    successToast("Je bent succesvol geregistreerd");
 
     goToLoginPage();
 
@@ -172,13 +184,18 @@ export const getUserByToken = async (token: string): Promise<InvitedUser> => {
     return data;
 };
 
-const authMeta = (title: string) => ({ auth: false, canSeeWhenLoggedIn: false, title, ignoreFrom: true });
+const authMeta = (title: string) => ({
+    auth: false,
+    canSeeWhenLoggedIn: false,
+    title,
+    ignoreFrom: true,
+});
 
 export const setAuthRoutes = (
     loginPage: Component,
     forgotPasswordPage: Component,
     resetPasswordPage: Component,
-    registerPage: Component,
+    registerPage: Component
 ) => {
     addRoutes([
         loginRoute(loginPage),
@@ -189,29 +206,29 @@ export const setAuthRoutes = (
 };
 
 const loginRoute = (loginPage: Component) => ({
-    path: '/inloggen',
+    path: "/",
     name: LOGIN_ROUTE_NAME,
     component: loginPage,
-    meta: authMeta('Login'),
+    meta: authMeta("Login"),
 });
 
 const forgotPasswordRoute = (forgotPasswordPage: Component) => ({
-    path: '/wachtwoord-vergeten',
+    path: "/wachtwoord-vergeten",
     name: FORGOT_PASSWORD_ROUTE_NAME,
     component: forgotPasswordPage,
-    meta: authMeta('Wachtwoord vergeten'),
+    meta: authMeta("Wachtwoord vergeten"),
 });
 
 const resetPasswordRoute = (resetPasswordPage: Component) => ({
-    path: '/wachtwoord-resetten',
+    path: "/wachtwoord-resetten",
     name: RESET_PASSWORD_ROUTE_NAME,
     component: resetPasswordPage,
-    meta: authMeta('Wachtwoord resetten'),
+    meta: authMeta("Wachtwoord resetten"),
 });
 
 const registerRoute = (registerPage: Component) => ({
-    path: '/registreren',
+    path: "/registreren",
     name: REGISTER_ROUTE_NAME,
     component: registerPage,
-    meta: authMeta('Registreren'),
+    meta: authMeta("Registreren"),
 });

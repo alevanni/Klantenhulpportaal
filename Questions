@@ -1,3 +1,9 @@
+-   The function for checking if someone is logged blocks everything
+-   It does not redirect
+-   It does not reload the tickets when you log in
+-   It does load the tickets when you log out though
+-   I needed to add .data to the data from the controllers. It does not seem to unwrap. Why?
+-   How to make the tickets reload?
 -   Only one category per ticket? Multiple
 -   Can normal users post comments? Yes
 -   What is the difference between notes and comments? Only who sees them?

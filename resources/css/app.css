@@ -5,3 +5,10 @@
 input {
     border: 1px solid black;
 }
+
+nav a {
+ margin:10px;
+}
+.card{
+    border: 1px solid black;
+}

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TicketResource;
 use Illuminate\Http\Request;
+use App\Models\Ticket;
 
 class TicketController extends Controller
 {
@@ -11,7 +13,8 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        $tickets = Ticket::orderBy('created_at', 'desc')->get();
+        return TicketResource::collection($tickets);
     }
 
     /**

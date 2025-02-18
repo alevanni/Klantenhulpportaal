@@ -1,14 +1,17 @@
-import type {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
-import type {UserResource} from 'domains/user/types';
-import type {LocationQueryValue} from 'vue-router';
+import type { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import type { User } from "../../domains/types";
+import type { LocationQueryValue } from "vue-router";
 
 export type RequestMiddleware = (request: AxiosRequestConfig) => void;
 export type ResponseMiddleware = (response: AxiosResponse) => void;
 export type ResponseErrorMiddleware = (error: AxiosError) => void;
 
-export type LoggedInUser = UserResource;
+export type LoggedInUser = User;
 
-export type InvitedUser = Pick<Required<RegisterData>, 'id' | 'firstName' | 'lastName' | 'email'>;
+export type InvitedUser = Pick<
+    Required<RegisterData>,
+    "id" | "firstName" | "lastName" | "email"
+>;
 
 export interface LoginCredentials {
     email: string;

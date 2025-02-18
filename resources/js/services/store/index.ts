@@ -1,14 +1,16 @@
-import type {New, State, Updatable} from './types';
+import type { New, State, Updatable } from "./types";
 
-import {computed, ref} from 'vue';
+import { computed, ref } from "vue";
 
-import {deleteRequest, getRequest, postRequest, putRequest} from '../http';
+import { deleteRequest, getRequest, postRequest, putRequest } from "../http";
 
 /**
  * Creates a store module for the given module name.
  */
 // eslint-disable-next-line max-lines-per-function
-export const storeModuleFactory = <T extends {id: number}>(moduleName: string) => {
+export const storeModuleFactory = <T extends { id: number }>(
+    moduleName: string
+) => {
     const state: State<T> = ref({});
 
     const getters = {
@@ -25,7 +27,8 @@ export const storeModuleFactory = <T extends {id: number}>(moduleName: string) =
          * Set items in the state.
          */
         setAll: (items: T[]) => {
-            for (const item of items) state.value[item.id] = Object.freeze(item);
+            for (const item of items)
+                state.value[item.id] = Object.freeze(item);
         },
         /**
          * Set one specific item in the storage
@@ -43,22 +46,22 @@ export const storeModuleFactory = <T extends {id: number}>(moduleName: string) =
 
     const actions = {
         getAll: async () => {
-            const {data} = await getRequest(moduleName);
+            const { data } = await getRequest(moduleName);
             if (!data) return;
-            setters.setAll(data);
+            setters.setAll(data.data);
         },
         getById: async (id: number) => {
-            const {data} = await getRequest(`${moduleName}/${id}`);
+            const { data } = await getRequest(`${moduleName}/${id}`);
             if (!data) return;
             setters.setById(data);
         },
         create: async (newItem: New<T>) => {
-            const {data} = await postRequest(moduleName, newItem);
+            const { data } = await postRequest(moduleName, newItem);
             if (!data) return;
             setters.setById(data);
         },
         update: async (id: number, item: Updatable<T>) => {
-            const {data} = await putRequest(`${moduleName}/${id}`, item);
+            const { data } = await putRequest(`${moduleName}/${id}`, item);
             if (!data) return;
             setters.setById(data);
         },

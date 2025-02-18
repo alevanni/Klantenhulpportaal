@@ -1,10 +1,10 @@
-import {createApp} from 'vue';
+import { createApp } from "vue";
 
-import Container from './dom/Container.vue';
+import Container from "./dom/Container.vue";
 
 const app = createApp(Container);
 
-const modalContainer = document.createElement('div');
+const modalContainer = document.createElement("div");
 document.body.appendChild(modalContainer);
 
 app.mount(modalContainer);
