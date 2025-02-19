@@ -135,7 +135,7 @@ export const logout = async () => {
 export const checkIfLoggedIn = async () => {
     const { data } = await getRequest(apiLoggedInCheckRoute);
 
-    setLoggedInAndUser(data.data);
+    setLoggedInAndUser(data);
 };
 
 export const sendResetPasswordEmail = async (email: string) => {

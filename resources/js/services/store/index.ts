@@ -48,7 +48,7 @@ export const storeModuleFactory = <T extends { id: number }>(
         getAll: async () => {
             const { data } = await getRequest(moduleName);
             if (!data) return;
-            setters.setAll(data.data);
+            setters.setAll(data);
         },
         getById: async (id: number) => {
             const { data } = await getRequest(`${moduleName}/${id}`);

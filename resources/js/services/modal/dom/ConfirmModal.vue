@@ -21,6 +21,7 @@
 </template>
 
 <script setup lang="ts">
+
 import type {ConfirmModalData} from '../types';
 import type {Modal} from 'bootstrap';
 

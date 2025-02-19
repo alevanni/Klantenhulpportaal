@@ -6,8 +6,9 @@ import { Ticket } from "../types";
 
 export const ticketStore = storeModuleFactory<Ticket>("tickets");
 
-ticketStore.actions.getAll();
 
-const tickets = ticketStore.getters.all;
+//ticketStore.actions.getAll();
 
-export const getAllTickets = ticketStore.getters.all;
+//const tickets = ticketStore.getters.all;
+
+//export const getAllTickets = ticketStore.getters.all;
