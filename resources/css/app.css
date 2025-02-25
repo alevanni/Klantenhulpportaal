@@ -12,3 +12,6 @@ nav a {
 .card{
     border: 1px solid black;
 }
+nav ul li {
+    display: inline;
+  }

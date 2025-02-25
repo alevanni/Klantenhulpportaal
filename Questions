@@ -1,9 +1,11 @@
+- how do i make it reload the resources after login?
+
 - there is a modal, but no bootstrap
 -   The function for checking if someone is logged blocks everything
 -   It does not redirect
 -   It does not reload the tickets when you log in
 -   It does load the tickets when you log out though
--   I needed to add .data to the data from the controllers. It does not seem to unwrap. Why?
+-   I needed to add .data to the data from the controllers. It does not seem to unwrap. Why? --- solved boot() methode in je AppServiceProvider : JsonResource::withoutWrapping();
 
 ---------------------------------------
 -   How to make the tickets reload?

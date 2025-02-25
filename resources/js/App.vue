@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Logout from './domains/users/components/Logout.vue';
 import { isLoggedIn } from './services/auth';
 
 
@@ -7,11 +8,22 @@ import { isLoggedIn } from './services/auth';
 
 <template>
     <nav v-if="isLoggedIn" class="app-vue-element app-nav">
-        
-        <!---<RouterLink :to="{name: 'tickets.overview'}">Overview of tickets</RouterLink> -->
-        
+
+
+        <ul>
+            <li>
+                <RouterLink :to="{ name: 'tickets.overview' }">Overview of tickets</RouterLink>
+            </li>
+            <li>
+                <RouterLink :to="{ name: 'tickets.create' }">New Ticket</RouterLink>
+            </li>
+            <li>
+                <Logout></Logout>
+            </li>
+        </ul>
 
     </nav>
+
     <RouterView />
 
 

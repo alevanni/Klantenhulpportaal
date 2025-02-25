@@ -99,6 +99,7 @@ registerBeforeRouteMiddleware(beforeMiddleware);
 
 const setLoggedInAndUser = (user: LoggedInUser) => {
     loggedInUser.value = user;
+    console.log(loggedInUser.value);
 };
 
 const logoutOfApp = () => {
@@ -108,8 +109,9 @@ const logoutOfApp = () => {
 
 export const login = async (credentials: LoginCredentials) => {
     const response = await postRequest(apiLoginRoute, credentials);
+    console.log(response.data);
+    setLoggedInAndUser(response.data);
 
-    setLoggedInAndUser(response.data.user);
     goToDefaultLoggedInPage();
 
     return response;
@@ -205,7 +207,7 @@ export const setAuthRoutes = (
     ]);
 };
 
-const loginRoute = (loginPage: Component) => ({
+export const loginRoute = (loginPage: Component) => ({
     path: "/",
     name: LOGIN_ROUTE_NAME,
     component: loginPage,

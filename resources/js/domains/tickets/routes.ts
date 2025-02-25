@@ -1,11 +1,28 @@
 import Overview from "./pages/Overview.vue";
 import Create from "./pages/Create.vue";
 import Edit from "./pages/Edit.vue";
-import View from "./pages/View.vue";
+import Show from "./pages/Show.vue";
+import {
+    createCreateRoute,
+    createEditRoute,
+    createOverviewRoute,
+    createShowRoute,
+} from "../../services/router/factory";
+import { storeModuleFactory } from "./../../services/store/index";
+
+import { Ticket } from "../types";
+export const TICKETS_DOMAIN_NAME = "tickets";
 
 export const ticketRoutes = [
-    { path: "/tickets", name: "tickets.overview", component: Overview },
-    { path: "/tickets/create", name: "createTicket", component: Create },
-    { path: "/tickets/edit/:id", name: "editTicket", component: Edit },
-    { path: "/tickets/view/:id", name: "viewTicket", component: View },
+    createOverviewRoute(TICKETS_DOMAIN_NAME, Overview),
+    createCreateRoute(TICKETS_DOMAIN_NAME, Create),
+    createShowRoute(TICKETS_DOMAIN_NAME, Show),
+    //  { path: "/tickets/edit/:id", name: "editTicket", component: Edit },
+    // { path: "/tickets/view/:id", name: "viewTicket", component: View },
 ];
+
+export const ticketStore = storeModuleFactory<Ticket>(TICKETS_DOMAIN_NAME);
+
+const tickets = ticketStore.getters.all;
+
+export const getAllTickets = ticketStore.getters.all;
