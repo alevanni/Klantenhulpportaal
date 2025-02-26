@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Card from './Card.vue';
-const { tickets } = defineProps(['tickets']);
+const { users } = defineProps(['users']);
 
 </script>
 
@@ -8,7 +8,7 @@ const { tickets } = defineProps(['tickets']);
     <div class="table">
         
 
-        <Card v-for="ticket in tickets" :key="ticket.id" :ticket="ticket"></Card>
+        <Card v-for="user in users" :key="user.id" :user="user"></Card>
 
 
     </div>

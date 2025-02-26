@@ -9,7 +9,7 @@ import type {
 import type { Component } from "vue";
 import type { NavigationGuard } from "vue-router";
 
-import { USER_DOMAIN_NAME } from "./../../domains/users/routes";
+import { USERS_DOMAIN_NAME } from "./../../domains/users/routes";
 import { computed, ref } from "vue";
 
 import {
@@ -67,6 +67,7 @@ const HTTP_FORBIDDEN = 403;
 const HTTP_UNAUTHORIZED = 401;
 
 const responseErrorMiddleware: ResponseErrorMiddleware = ({ response }) => {
+
     if (!response) return;
     const { status } = response;
     if (status === HTTP_FORBIDDEN) goToDefaultLoggedInPage();
@@ -99,7 +100,7 @@ registerBeforeRouteMiddleware(beforeMiddleware);
 
 const setLoggedInAndUser = (user: LoggedInUser) => {
     loggedInUser.value = user;
-    console.log(loggedInUser.value);
+    //console.log(loggedInUser.value);
 };
 
 const logoutOfApp = () => {
@@ -109,12 +110,18 @@ const logoutOfApp = () => {
 
 export const login = async (credentials: LoginCredentials) => {
     const response = await postRequest(apiLoginRoute, credentials);
-    console.log(response.data);
-    setLoggedInAndUser(response.data);
+    //console.log(response.data);
+    if (response.data.error) {
+        return response;
+    }
+    else {
+        setLoggedInAndUser(response.data);
 
-    goToDefaultLoggedInPage();
+        goToDefaultLoggedInPage();
 
-    return response;
+        return response;
+    }
+
 };
 
 export const guestLogin = async () => {
@@ -181,7 +188,7 @@ export const registerWithToken = async (data: RegisterData) => {
 };
 
 export const getUserByToken = async (token: string): Promise<InvitedUser> => {
-    const { data } = await getRequest(`${USER_DOMAIN_NAME}/token/${token}`);
+    const { data } = await getRequest(`${USERS_DOMAIN_NAME}/token/${token}`);
 
     return data;
 };

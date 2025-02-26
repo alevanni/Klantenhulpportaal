@@ -30,9 +30,9 @@ class AuthController extends Controller
             return $user; //UserResource::collection($user);
         }
 
-        return back()->withErrors([
+        return response(["error" => "The provided credentials do not match our records."], 401);/*back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        ])->onlyInput('email');*/
     }
     public function logged()
     {

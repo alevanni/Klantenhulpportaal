@@ -7,11 +7,44 @@ input {
 }
 
 nav a {
- margin:10px;
+    margin: 10px;
 }
-.card{
+
+.card {
     border: 1px solid black;
 }
+
 nav ul li {
     display: inline;
-  }
+}
+
+.card {
+    padding: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 25%;
+    margin-left: 6%;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: ghostwhite;
+
+}
+
+.badge {
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: fit-content;
+    margin: auto;
+}
+
+.open,
+.basic {
+    background-color: orange;
+}
+
+.closed,
+.admin {
+    background-color: lightgreen;
+}

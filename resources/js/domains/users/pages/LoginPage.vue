@@ -3,11 +3,15 @@ import LoginForm from '../components/LoginForm.vue';
 import { isLoggedIn, login, loginRoute } from '../../../services/auth';
 import { ref } from 'vue';
 import Logout from '../components/Logout.vue';
-const newCredentials = ref({ email: "", password: "" })
+const newCredentials = ref({ email: "", password: "" });
+const error = ref({});
 const enter = async (credentials: any) => {
     //console.log(credentials);
-    await login(credentials);
-
+    const {data} = await login(credentials);
+    console.log(data)
+    if (data.error) {
+        error.value=data;
+    }
 }
 
 </script>
@@ -15,5 +19,5 @@ const enter = async (credentials: any) => {
 <template>
     <h1>Welcome to the client help portal.</h1>
     <LoginForm v-if="!isLoggedIn" :credentials="newCredentials" @credentials-submit="enter"></LoginForm>
-
+<p>{{ error }}</p>
 </template>

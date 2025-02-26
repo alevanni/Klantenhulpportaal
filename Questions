@@ -1,5 +1,10 @@
-- how do i make it reload the resources after login?
+- How do i intercept and display axios errors with sanctum?
+- app.ts complains about the type of the routes
+- do i filter with the store or the controller?
+- should i create another domain called auth?
 
+
+- how do i make it reload the resources after login?
 - there is a modal, but no bootstrap
 -   The function for checking if someone is logged blocks everything
 -   It does not redirect

@@ -1,14 +1,18 @@
+import { createOverviewRoute } from "../../services/router/factory";
 import { storeModuleFactory } from "../../services/store";
 import { User } from "../types";
 import LoginPage from "./pages/LoginPage.vue";
 import Home from "./pages/LoginPage.vue";
+import Overview from "./pages/Overview.vue";
+
+export const USERS_DOMAIN_NAME = "users";
 export const userRoutes = [
-    //{ path: "/", name: "Login", component: LoginPage },
+    createOverviewRoute(USERS_DOMAIN_NAME, Overview),
     // { path: "/login", name: "Login", component: Login },
 ];
 
-export const USER_DOMAIN_NAME = "users";
-export const userStore = storeModuleFactory<User>(USER_DOMAIN_NAME);
+
+export const userStore = storeModuleFactory<User>(USERS_DOMAIN_NAME);
 
 const tickets = userStore.getters.all;
 
