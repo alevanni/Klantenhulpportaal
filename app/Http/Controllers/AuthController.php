@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Password;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -50,6 +53,12 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return "successfully logged out";
     }
+
+    /**
+     * Sends an email to the provided address with a link to reset the password
+     * 
+     */
+    public function passwordEmail(Request $request) {}
     /**
      * Display a listing of the resource.
      */

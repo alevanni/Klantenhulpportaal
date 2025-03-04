@@ -20,7 +20,7 @@ export const createShowRoute = (
 ) => ({
     path: `/${module}/:id`,
     name: module + SHOW_PAGE_NAME,
-    component,
+    component: component,
     meta: meta ? meta : defaultMeta,
 });
 
@@ -53,6 +53,6 @@ export const createEditRoute = (
 ) => ({
     path: `/${getSingularTranslation(module)}/:id/aanpassen`,
     name: module + EDIT_PAGE_NAME,
-    component,
+    component: component,
     meta: meta ? meta : defaultMeta,
 });

@@ -6,16 +6,14 @@ import { addRoutes } from "./services/router";
 import { useRouterInApp } from "./services/router/index";
 import { checkIfLoggedIn, setAuthRoutes } from "./services/auth";
 
-import LoginPage from "./domains/users/pages/LoginPage.vue";
-import ResetPassword from "./domains/users/pages/ResetPassword.vue";
-import ForgotPassword from "./domains/users/pages/ForgotPassword.vue";
-import Register from "./domains/users/pages/Register.vue";
+import LoginPage from "./domains/auth/pages/LoginPage.vue";
+import ResetPassword from "./domains/auth/pages/ResetPassword.vue";
+import ForgotPassword from "./domains/auth/pages/ForgotPassword.vue";
+import Register from "./domains/auth/pages/Register.vue";
 
 const app = createApp(App);
-
-addRoutes(ticketRoutes);
-addRoutes(userRoutes);
 setAuthRoutes(LoginPage, ForgotPassword, ResetPassword, Register);
+addRoutes([...ticketRoutes, ...userRoutes]);
 
 try {
     await checkIfLoggedIn();

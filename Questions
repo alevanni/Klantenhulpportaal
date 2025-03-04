@@ -1,8 +1,9 @@
 - How do i intercept and display axios errors with sanctum?
-- app.ts complains about the type of the routes
+- app.ts complains about the type of the routes 
+- it keeps the history in the query, but it gives problems with the routing. why?
 - do i filter with the store or the controller?
-- should i create another domain called auth?
-
+- should i create another domain called auth? -->done
+- bug in services/router/factory/index, during definitions of reoutes: it should be component: component, instead of just conponent
 
 - how do i make it reload the resources after login?
 - there is a modal, but no bootstrap

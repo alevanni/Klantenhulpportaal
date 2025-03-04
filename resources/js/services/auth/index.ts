@@ -67,7 +67,6 @@ const HTTP_FORBIDDEN = 403;
 const HTTP_UNAUTHORIZED = 401;
 
 const responseErrorMiddleware: ResponseErrorMiddleware = ({ response }) => {
-
     if (!response) return;
     const { status } = response;
     if (status === HTTP_FORBIDDEN) goToDefaultLoggedInPage();
@@ -113,15 +112,13 @@ export const login = async (credentials: LoginCredentials) => {
     //console.log(response.data);
     if (response.data.error) {
         return response;
-    }
-    else {
+    } else {
         setLoggedInAndUser(response.data);
 
         goToDefaultLoggedInPage();
 
         return response;
     }
-
 };
 
 export const guestLogin = async () => {
@@ -148,6 +145,7 @@ export const checkIfLoggedIn = async () => {
 };
 
 export const sendResetPasswordEmail = async (email: string) => {
+    console.log(email);
     const response = await postRequest(apiSendResetPasswordEmailRoute, {
         email,
     });
@@ -222,14 +220,14 @@ export const loginRoute = (loginPage: Component) => ({
 });
 
 const forgotPasswordRoute = (forgotPasswordPage: Component) => ({
-    path: "/wachtwoord-vergeten",
+    path: "/forgot-password",
     name: FORGOT_PASSWORD_ROUTE_NAME,
     component: forgotPasswordPage,
     meta: authMeta("Wachtwoord vergeten"),
 });
 
 const resetPasswordRoute = (resetPasswordPage: Component) => ({
-    path: "/wachtwoord-resetten",
+    path: "/reset-password",
     name: RESET_PASSWORD_ROUTE_NAME,
     component: resetPasswordPage,
     meta: authMeta("Wachtwoord resetten"),

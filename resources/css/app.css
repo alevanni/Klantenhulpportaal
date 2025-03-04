@@ -3,7 +3,7 @@
 @tailwind utilities;
 */
 input {
-    border: 1px solid black;
+    border:none;
 }
 
 nav a {
@@ -31,13 +31,11 @@ nav ul li {
 
 }
 
-.badge {
-    padding: 5px;
+.overview table, th, td{
     border: 1px solid black;
-    border-radius: 5px;
-    width: fit-content;
-    margin: auto;
-}
+    border-collapse: collapse;
+    padding: 10px;
+ }
 
 .open,
 .basic {

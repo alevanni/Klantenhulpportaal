@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/me', [AuthController::class, 'logged'])->middleware('auth:sanctum');
 
 Route::post("/login", [AuthController::class, 'authenticate']);
-
+Route::post("/send-reset-password-email", [AuthController::class, 'passwordEmail']);
 Route::post("/logout", [AuthController::class, 'logout']);
 
 Route::get('/tickets', [TicketController::class, 'index'])->middleware('auth:sanctum');

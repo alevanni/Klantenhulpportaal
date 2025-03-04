@@ -11,6 +11,7 @@ import {
 import { storeModuleFactory } from "./../../services/store/index";
 
 import { Ticket } from "../types";
+import { computed } from "vue";
 export const TICKETS_DOMAIN_NAME = "tickets";
 
 export const ticketRoutes = [
@@ -26,3 +27,8 @@ export const ticketStore = storeModuleFactory<Ticket>(TICKETS_DOMAIN_NAME);
 const tickets = ticketStore.getters.all;
 
 export const getAllTickets = ticketStore.getters.all;
+
+export const myTickets = (id: number) =>
+    computed(() =>
+        getAllTickets.value.filter((ticket) => ticket.created_by == id)
+    );

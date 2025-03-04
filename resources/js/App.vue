@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Logout from './domains/users/components/Logout.vue';
+import Logout from './domains/auth/components/Logout.vue';
 import { isLoggedIn, isAdmin, getLoggedInUser } from './services/auth';
 
 
@@ -12,7 +12,7 @@ import { isLoggedIn, isAdmin, getLoggedInUser } from './services/auth';
 
         <ul>
             <li>
-               Hi {{ getLoggedInUser().name }}
+                Hi {{ getLoggedInUser().name }}
             </li>
             <li>
                 <RouterLink :to="{ name: 'tickets.overview' }">Overview of tickets</RouterLink>
@@ -26,7 +26,7 @@ import { isLoggedIn, isAdmin, getLoggedInUser } from './services/auth';
             <li>
                 <Logout></Logout>
             </li>
-            
+
         </ul>
 
     </nav>
