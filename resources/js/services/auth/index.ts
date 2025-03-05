@@ -227,7 +227,7 @@ const forgotPasswordRoute = (forgotPasswordPage: Component) => ({
 });
 
 const resetPasswordRoute = (resetPasswordPage: Component) => ({
-    path: "/reset-password",
+    path: "/reset-password/:token/:email",
     name: RESET_PASSWORD_ROUTE_NAME,
     component: resetPasswordPage,
     meta: authMeta("Wachtwoord resetten"),

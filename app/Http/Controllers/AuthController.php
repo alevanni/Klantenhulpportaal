@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Password;
 use App\Http\Resources\UserResource;
+use App\Mail\ResetPasswordLink;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+use App\Models\PasswordReset;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -58,7 +61,16 @@ class AuthController extends Controller
      * Sends an email to the provided address with a link to reset the password
      * 
      */
-    public function passwordEmail(Request $request) {}
+    public function passwordEmail(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $user = User::where('email', '=', $request->email)->firstOrFail();
+        $token = (new PasswordReset)->create($user);
+        Mail::to($user)->send(new ResetPasswordLink($token, $user));
+
+        return response("successfully sent an email");
+    }
     /**
      * Display a listing of the resource.
      */
