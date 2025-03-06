@@ -12,7 +12,7 @@ import { isLoggedIn, isAdmin, getLoggedInUser } from './services/auth';
 
         <ul>
             <li>
-                Hi {{ getLoggedInUser().name }}
+                Hi {{ getLoggedInUser().firstName }}
             </li>
             <li>
                 <RouterLink :to="{ name: 'tickets.overview' }">Overview of tickets</RouterLink>

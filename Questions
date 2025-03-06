@@ -1,16 +1,18 @@
+- what is guest login for?
+- The "register with token" function is for when i send a confirmation email with a link to complete the registration? or is it getuser by token?
 - How do i intercept and display axios errors with sanctum?
 - app.ts complains about the type of the routes 
 - it keeps the history in the query, but it gives problems with the routing. why?
-- do i filter with the store or the controller?
+- do i filter with the store or the controller? --> i did it with the store
 - should i create another domain called auth? -->done
 - bug in services/router/factory/index, during definitions of reoutes: it should be component: component, instead of just conponent
 
-- how do i make it reload the resources after login?
-- there is a modal, but no bootstrap
--   The function for checking if someone is logged blocks everything
--   It does not redirect
--   It does not reload the tickets when you log in
--   It does load the tickets when you log out though
+- how do i make it reload the resources after login? --->done
+- there is a modal, but no bootstrap and it looks like shit
+-   The function for checking if someone is logged blocks everything --> solved
+-   It does not redirect ---> solved
+-   It does not reload the tickets when you log in ---> solved
+-   It does load the tickets when you log out though ---> solved
 -   I needed to add .data to the data from the controllers. It does not seem to unwrap. Why? --- solved boot() methode in je AppServiceProvider : JsonResource::withoutWrapping();
 
 ---------------------------------------

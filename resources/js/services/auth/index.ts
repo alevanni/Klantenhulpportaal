@@ -185,7 +185,7 @@ export const registerWithToken = async (data: RegisterData) => {
     return response;
 };
 
-export const getUserByToken = async (token: string): Promise<InvitedUser> => {
+export const getUserByToken = async (token: string) => {
     const { data } = await getRequest(`${USERS_DOMAIN_NAME}/token/${token}`);
 
     return data;

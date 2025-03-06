@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Password;
 use App\Http\Resources\UserResource;
 use App\Mail\ResetPasswordLink;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
@@ -36,9 +36,7 @@ class AuthController extends Controller
             return $user; //UserResource::collection($user);
         }
 
-        return response(["error" => "The provided credentials do not match our records."], 401);/*back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');*/
+        return response(["error" => "The provided credentials do not match our records."], 401);
     }
     public function logged()
     {
@@ -70,6 +68,16 @@ class AuthController extends Controller
         Mail::to($user)->send(new ResetPasswordLink($token, $user));
 
         return response("successfully sent an email");
+    }
+    /**
+     * 
+     * 
+     */
+    public function userByToken(String $token)
+    {
+        $email = PasswordReset::select('email')->where('token', '=', $token)->latest()->get();
+        $user = User::where('email', '=', $email[0]->email)->firstOrFail();
+        return new UserResource($user);
     }
     /**
      * Display a listing of the resource.

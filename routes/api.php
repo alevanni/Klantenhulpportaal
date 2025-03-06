@@ -16,3 +16,5 @@ Route::post("/logout", [AuthController::class, 'logout']);
 Route::get('/tickets', [TicketController::class, 'index'])->middleware('auth:sanctum');
 
 Route::get('/users', [UserController::class, 'index'])->middleware('auth:sanctum');
+
+Route::get('/users/token/{token}', [AuthController::class, 'userByToken']);
