@@ -98,6 +98,7 @@ class AuthController extends Controller
         PasswordReset::where('email', $user->email)->delete();
         return response("successfully reset password");
     }
+
     /**
      * Display a listing of the resource.
      */
