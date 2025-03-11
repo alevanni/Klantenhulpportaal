@@ -46,3 +46,13 @@ nav ul li {
 .admin {
     background-color: lightgreen;
 }
+
+.toast {
+    border: 1px solid black;
+
+}
+
+.toast button {
+    width: 100px;
+    height: 100px;
+}

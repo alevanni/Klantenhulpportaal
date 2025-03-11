@@ -10,8 +10,11 @@ const ticket = ticketStore.getters.byId(+useRoute().params.id);
 </script>
 
 <template>
-    <div v-if="ticket"><h1>{{ ticket.title }} - {{userStore.getters.byId(ticket.created_by).value?.name}}</h1>
-        <p>{{ ticket.description }}</p></div>
+    <div v-if="ticket">
+        <h1>{{ ticket.title }} - {{ userStore.getters.byId(ticket.created_by).value?.firstName + ' ' +
+            userStore.getters.byId(ticket.created_by).value?.lastName }}</h1>
+        <p>{{ ticket.description }}</p>
+    </div>
 
-    
+
 </template>

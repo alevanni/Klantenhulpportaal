@@ -20,9 +20,10 @@ export interface LoginCredentials {
 }
 
 export interface ResetPasswordData {
+    email: string;
     password: string;
-    repeatPassword: string;
-    resetPasswordToken: LocationQueryValue | LocationQueryValue[];
+    password_confirmation: string;
+    token: LocationQueryValue | LocationQueryValue[];
 }
 
 export interface RegisterData {

@@ -5,9 +5,12 @@ import EmailForm from '../components/EmailForm.vue';
 const email = ref("");
 
 const sendLink = async (email: string) => {
-    console.log("hi!")
-    const { data } = await sendResetPasswordEmail(email);
-    console.log(data)
+    try {
+        const { data } = await sendResetPasswordEmail(email);
+    }
+    catch (error) {
+        console.log(error);
+    }
 
 }
 </script>

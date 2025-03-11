@@ -39,7 +39,7 @@ class ResetPasswordLink extends Mailable
     {
         return new Content(
             view: 'mail.reset-password-link',
-            with: ['name' => $this->user->name, 'token' => $this->token, 'email' => $this->user->email]
+            with: ['name' => $this->user->first_name, 'token' => $this->token, 'email' => $this->user->email]
         );
     }
 

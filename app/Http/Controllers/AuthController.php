@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdatePasswordRequest;
 use Illuminate\Support\Facades\Password;
 use App\Http\Resources\UserResource;
 use App\Mail\ResetPasswordLink;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
@@ -36,9 +37,7 @@ class AuthController extends Controller
             return $user; //UserResource::collection($user);
         }
 
-        return response(["error" => "The provided credentials do not match our records."], 401);/*back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');*/
+        return response(["message" => "The provided credentials do not match our records."], 401);
     }
     public function logged()
     {
@@ -65,11 +64,39 @@ class AuthController extends Controller
     {
         $request->validate(['email' => 'required|email']);
 
-        $user = User::where('email', '=', $request->email)->firstOrFail();
-        $token = (new PasswordReset)->create($user);
-        Mail::to($user)->send(new ResetPasswordLink($token, $user));
+        $user = User::where('email', '=', $request->email)->first();
+        echo $user;
+        if ($user) {
+            $token = (new PasswordReset)->create($user);
+            Mail::to($user)->send(new ResetPasswordLink($token, $user));
 
-        return response("successfully sent an email");
+            return response("successfully sent an email");
+        } else return response(["message" => "The provided credentials do not match our records."], 401);
+    }
+    /**
+     * Gets the user related to a token
+     * 
+     */
+    public function userByToken(String $token)
+    {
+        $email = PasswordReset::select('email')->where('token', '=', $token)->latest()->get();
+        $user = User::where('email', '=', $email[0]->email)->firstOrFail();
+        return new UserResource($user);
+    }
+    /**
+     * Updates the password
+     */
+    public function updatePassword(UpdatePasswordRequest $request)
+    {
+        $validated = $request->validated();
+        $user = User::where('email', '=', $request->email)->firstOrFail();
+        $user->forceFill([
+            'password' => bcrypt($validated['password']),
+        ])->setRememberToken(Str::random(60));
+        $user->save();
+
+        PasswordReset::where('email', $user->email)->delete();
+        return response("successfully reset password");
     }
     /**
      * Display a listing of the resource.

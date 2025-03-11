@@ -69,6 +69,7 @@ const HTTP_UNAUTHORIZED = 401;
 const responseErrorMiddleware: ResponseErrorMiddleware = ({ response }) => {
     if (!response) return;
     const { status } = response;
+    console.log(status);
     if (status === HTTP_FORBIDDEN) goToDefaultLoggedInPage();
     else if (status === HTTP_UNAUTHORIZED && isLoggedIn.value) {
         // only need to logout of the app, because on the backend the user is already logged out
@@ -108,9 +109,17 @@ const logoutOfApp = () => {
 };
 
 export const login = async (credentials: LoginCredentials) => {
-    const response = await postRequest(apiLoginRoute, credentials);
-    //console.log(response.data);
-    if (response.data.error) {
+    const { data } = await postRequest(apiLoginRoute, credentials);
+    if (!data) return;
+    setLoggedInAndUser(data);
+
+    goToDefaultLoggedInPage();
+
+    return data;
+
+    /* original
+    if (response.data.message) {
+        console.log(response);
         return response;
     } else {
         setLoggedInAndUser(response.data);
@@ -118,7 +127,7 @@ export const login = async (credentials: LoginCredentials) => {
         goToDefaultLoggedInPage();
 
         return response;
-    }
+    }*/
 };
 
 export const guestLogin = async () => {
@@ -185,7 +194,7 @@ export const registerWithToken = async (data: RegisterData) => {
     return response;
 };
 
-export const getUserByToken = async (token: string): Promise<InvitedUser> => {
+export const getUserByToken = async (token: string) => {
     const { data } = await getRequest(`${USERS_DOMAIN_NAME}/token/${token}`);
 
     return data;

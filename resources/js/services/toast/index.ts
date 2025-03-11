@@ -1,16 +1,20 @@
-import type { Toast } from './types';
+import type { Toast } from "./types";
 
-import { createApp, h, ref } from 'vue';
+import { createApp, h, ref } from "vue";
 
-import { registerResponseErrorMiddleware, registerResponseMiddleware } from './../http';
+import {
+    registerResponseErrorMiddleware,
+    registerResponseMiddleware,
+} from "./../http";
 
-import ToastComponent from './Toast.vue';
+import ToastComponent from "./Toast.vue";
 
 const TOAST_DURATION = 5000;
 const STATUS_INFO = 401;
 const TIMEOUT = 300;
+const UNPROCESSABLE_CONTENT = 422;
 
-const toastContainer = document.createElement('div');
+const toastContainer = document.createElement("div");
 document.body.appendChild(toastContainer);
 
 const toasts = ref<Toast[]>([]);
@@ -21,7 +25,9 @@ const hideToastMessage = (toast: Toast) => {
 
     toast.timeoutId = setTimeout(() => {
         const allToasts = toasts.value;
-        const index = allToasts.findIndex(({ message }) => message === toast.message);
+        const index = allToasts.findIndex(
+            ({ message }) => message === toast.message
+        );
         allToasts.splice(index, 1);
     }, TIMEOUT);
 };
@@ -32,7 +38,7 @@ const hideToastMessageAfterDelay = (toast: Toast) => {
 };
 
 createApp({
-    name: 'ToastContainer',
+    name: "ToastContainer",
     setup() {
         return () => {
             const toastMessages = toasts.value.map((toast, index) =>
@@ -40,16 +46,16 @@ createApp({
                     toast,
                     onHide: () => hideToastMessage(toast),
                     key: index,
-                }),
+                })
             );
 
             return h(
-                'div',
+                "div",
                 {
-                    class: 'position-fixed bottom-0 start-0',
-                    style: 'z-index:9999;',
+                    class: "position-fixed bottom-0 start-0",
+                    style: "z-index:9999;",
                 },
-                toastMessages,
+                toastMessages
             );
         };
     },
@@ -60,9 +66,12 @@ const createToast = (toast: Toast) => {
     hideToastMessageAfterDelay(toast);
 };
 
-export const successToast = (message: string) => createToast({ message, show: true, variant: 'success' });
-export const dangerToast = (message: string) => createToast({ message, show: true, variant: 'danger' });
-export const infoToast = (message: string) => createToast({ message, show: true, variant: 'info' });
+export const successToast = (message: string) =>
+    createToast({ message, show: true, variant: "success" });
+export const dangerToast = (message: string) =>
+    createToast({ message, show: true, variant: "danger" });
+export const infoToast = (message: string) =>
+    createToast({ message, show: true, variant: "info" });
 
 registerResponseMiddleware(({ data }) => {
     // Checks if data has ID. If so, it's a database object and no toast is needed.
@@ -75,5 +84,13 @@ registerResponseErrorMiddleware(({ response }) => {
     const { data, status } = response;
     if (!data?.message) return;
     if (status === STATUS_INFO) return infoToast(data.message);
+    if (status === UNPROCESSABLE_CONTENT) {
+        let string = "<ul>";
+        for (let prop in data.errors) {
+            //finish this
+        }
+        return infoToast(string); //finish this, make it pretty
+    }
+
     dangerToast(data.message);
 });
