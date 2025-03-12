@@ -1,29 +1,37 @@
 <script setup lang="ts">
-import LoginForm from '../../auth/components/LoginForm.vue';
-import { isLoggedIn, login, loginRoute } from '../../../services/auth';
+import { login } from '../../../services/auth';
 import { ref } from 'vue';
-import Logout from '../../auth/components/Logout.vue';
-const newCredentials = ref({ email: "", password: "" });
-//const error = ref({});
-const enter = async (credentials: any) => {
-    // if i don't do try catch, it gives me a warn
-    try {
-        const { data } = await login(credentials);
-    }
-    catch (error) {
-        console.log(error);
-    }
-}
+import { LoginCredentials } from '../../../services/auth/types';
 
+const newCredentials = ref<LoginCredentials>({ email: "", password: "", rememberMe: false });
 
-function e(reason: any): PromiseLike<never> {
-    throw new Error('Function not implemented.');
-}
+const submitLogin = async () => {
+    // try {        
+        await login(newCredentials.value);
+    // } catch (error) {
+        // console.log(error);        
+    }
+// }
 </script>
 
 <template>
     <h1>Welcome to the client help portal.</h1>
-    <LoginForm v-if="!isLoggedIn" :credentials="newCredentials" @credentials-submit="enter"></LoginForm>
+    <form>
+        <table>
+            <tbody>
+            <tr>
+                <td><label for="email">Email</label></td>
+                <td><input id="email" v-model="newCredentials.email"></td>
+            </tr>
+            <tr>
+                <td><label for="password">Password</label></td>
+                <td><input id="password" v-model="newCredentials.password"></td>
+            </tr>
+            <tr>
+                <td><button @click.prevent="submitLogin">Submit</button></td>
+            </tr>
+        </tbody>
+        </table>
+    </form>
     <RouterLink :to="{ name: 'ForgotPassword' }">Forgot your password?</RouterLink>
-
 </template>

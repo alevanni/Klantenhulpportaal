@@ -32,12 +32,10 @@ class AuthController extends Controller
 
             $request->session()->regenerate();
 
-            $user = new UserResource(Auth::user());
-
-            return $user; //UserResource::collection($user);
+            return new UserResource(Auth::user());; //UserResource::collection($user);
         }
 
-        return response(["message" => "The provided credentials do not match our records."], 401);
+        return response()->json(["message" => "The provided credentials do not match our records."], 401);
     }
     public function logged()
     {

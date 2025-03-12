@@ -87,8 +87,9 @@ registerResponseErrorMiddleware(({ response }) => {
     if (status === UNPROCESSABLE_CONTENT) {
         let string = "<ul>";
         for (let prop in data.errors) {
-            //finish this
+            data.errors[prop].forEach((err) => string = string + "<li>" + err + "</li>");
         }
+        string = string + "</ul>";
         return infoToast(string); //finish this, make it pretty
     }
 

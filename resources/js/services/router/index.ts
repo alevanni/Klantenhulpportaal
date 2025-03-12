@@ -1,4 +1,4 @@
-import type {App} from 'vue';
+import type { App } from 'vue';
 import type {
     LocationQueryRaw,
     NavigationGuard,
@@ -7,9 +7,9 @@ import type {
     RouteRecordRaw,
 } from 'vue-router';
 
-import {createRouter, createWebHistory} from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 
-import {CREATE_PAGE_NAME, EDIT_PAGE_NAME, OVERVIEW_PAGE_NAME, SHOW_PAGE_NAME} from './factory';
+import { CREATE_PAGE_NAME, EDIT_PAGE_NAME, OVERVIEW_PAGE_NAME, SHOW_PAGE_NAME } from './factory';
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,8 +23,8 @@ export const addRoutes = (routes: RouteRecordRaw[]) => {
 export const useRouterInApp = (app: App<Element>) => app.use(router);
 
 const createRoute = (name: string, id?: number, query?: LocationQueryRaw) => {
-    const route: RouteLocationRaw = {name};
-    if (id) route.params = {id};
+    const route: RouteLocationRaw = { name };
+    if (id) route.params = { id };
     if (query) route.query = query;
 
     return route;
@@ -40,9 +40,9 @@ const beforeRouteMiddleware: NavigationGuard[] = [
         const fromQuery = from.query.from;
         if (fromQuery && typeof fromQuery === 'string') {
             if (fromQuery === to.fullPath) return false;
-            router.push(fromQuery);
+            router.push(to.fullPath); //no, change this
 
-            return true;
+            return false;
         }
 
         return false;

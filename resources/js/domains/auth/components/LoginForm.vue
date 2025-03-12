@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-
 const emit = defineEmits(['credentialsSubmit']);
+
 const { credentials } = defineProps(['credentials']);
+
 const credentialsCopy = ref({ ...credentials });
-const submitLoginForm = () => {
-    emit('credentialsSubmit', credentialsCopy.value);
-}
+
 </script>
 
 <template>
-    <form @submit.prevent="submitLoginForm">
+    <form @submit.prevent="emit('credentialsSubmit', credentialsCopy)">
         <table>
+            <tbody>
             <tr>
                 <td><label for="email">Email</label></td>
                 <td><input id="email" v-model="credentialsCopy.email"></td>
@@ -22,8 +22,9 @@ const submitLoginForm = () => {
                 <td><input id="password" v-model="credentialsCopy.password"></td>
             </tr>
             <tr>
-                <td><input id="submit" type="submit"></td>
+                <td><button id="submit" type="submit">asdasdsad</button></td>
             </tr>
+        </tbody>
         </table>
     </form>
     {{ credentialsCopy }}

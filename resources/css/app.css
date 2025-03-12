@@ -3,7 +3,7 @@
 @tailwind utilities;
 */
 input {
-    border:none;
+    border: none;
 }
 
 nav a {
@@ -31,11 +31,13 @@ nav ul li {
 
 }
 
-.overview table, th, td{
+.overview table,
+th,
+td {
     border: 1px solid black;
     border-collapse: collapse;
     padding: 10px;
- }
+}
 
 .open,
 .basic {
@@ -50,9 +52,4 @@ nav ul li {
 .toast {
     border: 1px solid black;
 
-}
-
-.toast button {
-    width: 100px;
-    height: 100px;
 }

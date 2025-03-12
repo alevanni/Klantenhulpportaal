@@ -11,7 +11,6 @@ import ResetPassword from "./domains/auth/pages/ResetPassword.vue";
 import ForgotPassword from "./domains/auth/pages/ForgotPassword.vue";
 import Register from "./domains/auth/pages/Register.vue";
 
-const app = createApp(App);
 setAuthRoutes(LoginPage, ForgotPassword, ResetPassword, Register);
 addRoutes([...ticketRoutes, ...userRoutes]);
 
@@ -20,6 +19,7 @@ try {
 } catch (_) {
     // so we dont get stuck in an endless loop of refreshing and checking if logged in
 } finally {
+    const app = createApp(App);
     useRouterInApp(app);
     app.mount("#app");
 }

@@ -8,6 +8,7 @@ const { tickets } = defineProps(['tickets']);
 <template>
     <div class="table">
         <table>
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>Title</th>
@@ -17,7 +18,10 @@ const { tickets } = defineProps(['tickets']);
                 <th>Last Updated on</th>
                 <th>Assigned to</th>
             </tr>
+        </thead>
+                <tbody>
             <Card v-for="ticket in tickets" :key="ticket.id" :ticket="ticket"></Card>
+                </tbody>
         </table>
 
 
