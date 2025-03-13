@@ -15,11 +15,9 @@ class Ticket extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'name',
         'created_by',
         'title',
         'description',
-        'category',
         'status',
         'assigned_to',
     ];
@@ -32,9 +30,9 @@ class Ticket extends Model
     {
         return $this->belongsToMany(User::class)->where('admin', 1);
     }
-    public function category()
+    public function categories()
     {
-        return $this->balongsTo(Category::class);
+        return $this->belongsToMany(Category::class);
     }
     public function comments()
     {

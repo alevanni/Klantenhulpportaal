@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CategoriesDisplay from '../../categories/components/CategoriesDisplay.vue';
 import { userStore } from '../../users/routes';
 const { ticket } = defineProps(['ticket']);
 
@@ -10,6 +11,7 @@ const { ticket } = defineProps(['ticket']);
         <td>{{ ticket.id }}</td>
         <td>
             <RouterLink :to="{ name: 'tickets.show', params: { id: ticket.id } }">{{ ticket.title }}</RouterLink>
+            <CategoriesDisplay :categories="ticket.categories"></CategoriesDisplay>
         </td>
         <td :class="[(ticket.status) ? 'open' : 'closed']">{{ ticket.status ? 'Open' : 'Closed' }}</td>
         <td>{{ userStore.getters.byId(ticket.created_by).value?.firstName + ' ' +

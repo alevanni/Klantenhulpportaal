@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\TicketCategoryResource;
 
 class TicketResource extends JsonResource
 {
@@ -19,7 +20,7 @@ class TicketResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'created_by' => $this->created_by,
-            'category' => $this->category,
+            'categories' => TicketCategoryResource::collection($this->categories),
             'status' => $this->status,
             'assigned_to' => $this->assigned_to,
             'created_on' => $this->created_at,

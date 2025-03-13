@@ -1,15 +1,20 @@
-import type { App } from 'vue';
+import type { App } from "vue";
 import type {
     LocationQueryRaw,
     NavigationGuard,
     NavigationHookAfter,
     RouteLocationRaw,
     RouteRecordRaw,
-} from 'vue-router';
+} from "vue-router";
 
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from "vue-router";
 
-import { CREATE_PAGE_NAME, EDIT_PAGE_NAME, OVERVIEW_PAGE_NAME, SHOW_PAGE_NAME } from './factory';
+import {
+    CREATE_PAGE_NAME,
+    EDIT_PAGE_NAME,
+    OVERVIEW_PAGE_NAME,
+    SHOW_PAGE_NAME,
+} from "./factory";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,23 +35,27 @@ const createRoute = (name: string, id?: number, query?: LocationQueryRaw) => {
     return route;
 };
 
-export const goToRoute = (name: string, id?: number, query?: LocationQueryRaw) => {
+export const goToRoute = (
+    name: string,
+    id?: number,
+    query?: LocationQueryRaw
+) => {
     if (onPage(name) && !query && !id) return;
     router.push(createRoute(name, id, query));
 };
 
 const beforeRouteMiddleware: NavigationGuard[] = [
-    (to, from) => {
+    /**  (to, from) => {
         const fromQuery = from.query.from;
-        if (fromQuery && typeof fromQuery === 'string') {
+        if (fromQuery && typeof fromQuery === "string") {
             if (fromQuery === to.fullPath) return false;
-            router.push(to.fullPath); //no, change this
+            router.push(fromQuery); //no, change this
 
-            return false;
+            return true;
         }
 
         return false;
-    },
+    },*/
 ];
 
 router.beforeEach(async (to, from, next) => {
@@ -58,33 +67,43 @@ router.beforeEach(async (to, from, next) => {
     return next();
 });
 
-export const registerBeforeRouteMiddleware = (middleware: NavigationGuard) => beforeRouteMiddleware.push(middleware);
+export const registerBeforeRouteMiddleware = (middleware: NavigationGuard) =>
+    beforeRouteMiddleware.push(middleware);
 
 const routerAfterMiddleware: NavigationHookAfter[] = [];
-export const registerAfterMiddleware = (middleware: NavigationHookAfter) => routerAfterMiddleware.push(middleware);
+export const registerAfterMiddleware = (middleware: NavigationHookAfter) =>
+    routerAfterMiddleware.push(middleware);
 
 /** Go to the show page for the given module name */
-export const goToShowPage = (moduleName: string, id: number) => goToRoute(moduleName + SHOW_PAGE_NAME, id);
+export const goToShowPage = (moduleName: string, id: number) =>
+    goToRoute(moduleName + SHOW_PAGE_NAME, id);
 /** Go to the edit page for the given module name */
-export const goToEditPage = (moduleName: string, id: number) => goToRoute(moduleName + EDIT_PAGE_NAME, id);
+export const goToEditPage = (moduleName: string, id: number) =>
+    goToRoute(moduleName + EDIT_PAGE_NAME, id);
 /** Go to the create page for the given module name */
-export const goToCreatePage = (moduleName: string) => goToRoute(moduleName + CREATE_PAGE_NAME);
+export const goToCreatePage = (moduleName: string) =>
+    goToRoute(moduleName + CREATE_PAGE_NAME);
 /** Go to the overview page for the given module name */
-export const goToOverviewPage = (moduleName: string) => goToRoute(moduleName + OVERVIEW_PAGE_NAME);
+export const goToOverviewPage = (moduleName: string) =>
+    goToRoute(moduleName + OVERVIEW_PAGE_NAME);
 
 /** Get the current route */
 export const getCurrentRoute = () => router.currentRoute;
 /** Get the query from the current route */
 export const getCurrentRouteQuery = () => router.currentRoute.value.query;
 /** Get the id from the params from the current route */
-export const getCurrentRouteId = () => parseInt(router.currentRoute.value.params.id.toString());
+export const getCurrentRouteId = () =>
+    parseInt(router.currentRoute.value.params.id.toString());
 /** Get the token from the params from the current route */
-export const getCurrentRouteToken = () => router.currentRoute.value.params.token.toString();
+export const getCurrentRouteToken = () =>
+    router.currentRoute.value.params.token.toString();
 /** Get the name from the current route */
-export const getCurrentRouteName = () => router.currentRoute.value.name?.toString();
+export const getCurrentRouteName = () =>
+    router.currentRoute.value.name?.toString();
 
 /** checks if the given string is in the current routes name */
-const onPage = (pageName: string) => router.currentRoute.value.name?.toString().includes(pageName);
+const onPage = (pageName: string) =>
+    router.currentRoute.value.name?.toString().includes(pageName);
 
 /** go back one page */
 export const goBack = () => router.back();

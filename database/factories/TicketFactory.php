@@ -25,7 +25,7 @@ class TicketFactory extends Factory
             'status' => $this->faker->boolean(30),
             'created_by' => User::where('admin', 0)->inRandomOrder()->first()->id,
             'assigned_to' => User::where('admin', 1)->inRandomOrder()->first()->id,
-            'category' => Category::inRandomOrder()->first()->id,
+
         ];
     }
 }
