@@ -1,3 +1,5 @@
+-   How do I stop unauthorized users? Do I have to do it with sanctum?
+-   How do i handle the categories in the edit?
 -   I had to change the RequestPasswordData type so that it has the email inside
 -   what is guest login for?
 -   The "register with token" function is for when i send a confirmation email with a link to complete the registration? or is it getuser by token?

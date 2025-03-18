@@ -12,6 +12,7 @@ const { ticket } = defineProps(['ticket']);
         <td>
             <RouterLink :to="{ name: 'tickets.show', params: { id: ticket.id } }">{{ ticket.title }}</RouterLink>
             <CategoriesDisplay :categories="ticket.categories"></CategoriesDisplay>
+            <RouterLink :to="{ name: 'tickets.edit', params: { id: ticket.id } }">Edit</RouterLink>
         </td>
         <td :class="[(ticket.status) ? 'open' : 'closed']">{{ ticket.status ? 'Open' : 'Closed' }}</td>
         <td>{{ userStore.getters.byId(ticket.created_by).value?.firstName + ' ' +

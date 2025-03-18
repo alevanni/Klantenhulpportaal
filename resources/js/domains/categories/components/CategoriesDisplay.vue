@@ -5,5 +5,5 @@ const { categories } = defineProps(['categories']);
 </script>
 
 <template>
-    <Badge v-for="category in categories" :key="category.ïd" :name="category.name"></Badge>
+    <Badge v-for="category in categories" :key="category.ïd" :id="category.id"></Badge>
 </template>

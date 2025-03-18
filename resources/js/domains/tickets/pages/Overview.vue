@@ -5,8 +5,10 @@ import Table from './../components/Table.vue';
 import { userStore, getAllUsers } from '../../users/routes';
 import { ref } from 'vue';
 import { compare } from '../../../services/helpers/sort';
+import { categoryStore } from '../../categories/routes';
 ticketStore.actions.getAll();
 userStore.actions.getAll();
+categoryStore.actions.getAll();
 const tickets = getLoggedInUser().isAdmin ? getAllTickets : myTickets(getLoggedInUser().id);
 
 

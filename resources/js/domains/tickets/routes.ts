@@ -18,7 +18,7 @@ export const ticketRoutes = [
     createOverviewRoute(TICKETS_DOMAIN_NAME, Overview),
     createCreateRoute(TICKETS_DOMAIN_NAME, Create),
     createShowRoute(TICKETS_DOMAIN_NAME, Show),
-    //  { path: "/tickets/edit/:id", name: "editTicket", component: Edit },
+    createEditRoute(TICKETS_DOMAIN_NAME, Edit), //  { path: "/tickets/edit/:id", name: "editTicket", component: Edit },
     // { path: "/tickets/view/:id", name: "viewTicket", component: View },
 ];
 

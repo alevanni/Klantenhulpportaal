@@ -51,7 +51,7 @@ export const createEditRoute = (
     component: RouteComponent,
     meta?: Meta
 ) => ({
-    path: `/${getSingularTranslation(module)}/:id/aanpassen`,
+    path: `/${module}/:id/aanpassen`,
     name: module + EDIT_PAGE_NAME,
     component: component,
     meta: meta ? meta : defaultMeta,

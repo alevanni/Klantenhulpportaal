@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import { categoryStore } from '../routes';
+const { id } = defineProps(['id']);
 
-const { name } = defineProps(['name']);
 </script>
 
 <template>
-    <span class="category-badge">#{{ name }}</span>
+    <span class="category-badge">#{{ categoryStore.getters.byId(id).value?.name }}</span>
 </template>
