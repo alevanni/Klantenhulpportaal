@@ -6,6 +6,11 @@ input {
     border: none;
 }
 
+nav {
+    width: 60%;
+    margin: auto;
+}
+
 nav a {
     margin: 10px;
 }
@@ -54,10 +59,29 @@ td {
 
 }
 
-.category-badge{
-background-color: lightpink;
-border: 1px solid black;
-border-radius: 10px;
-padding: 5px;
-margin: 5px;
+.category-badge {
+    background-color: lightpink;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.edit-link {
+    text-decoration: none;
+    margin: 10px;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.edit-link:hover {
+    background-color: cornflowerblue;
+    color: white;
+}
+
+.ticket-container {
+    background-color: aliceblue;
+    width: 60%;
+    margin: auto;
 }

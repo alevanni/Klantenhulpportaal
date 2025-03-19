@@ -13,7 +13,7 @@ export interface Ticket {
     created_by: number;
     title: string;
     description: string;
-    category: number;
+    categories: { id: number }[];
     status: boolean;
     assigned_to: number;
     created_on: string;

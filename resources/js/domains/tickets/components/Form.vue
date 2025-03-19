@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import { getAllCategories } from '../../categories/routes';
+import { getAllCategories, getAllButCategories } from '../../categories/routes';
 const { ticket } = defineProps(['ticket']);
 const ticketCopy = ref({ ...ticket });
-
+ticketCopy.value.categories = [];
 const emit = defineEmits(['ticketSubmit']);
 
 const submitForm = () => {
@@ -27,7 +27,7 @@ const submitForm = () => {
                 <tr>
                     <td><label for="categories">Tags</label></td>
                     <td><select v-model="ticketCopy.categories" multiple>
-                            <option v-for="category in getAllCategories" :key="category.id" :value="category.id">
+                            <option v-for="category in getAllButCategories(ticket.categories).value" :key="category.id" :value="category.id">
                                 {{ category.name }}
                             </option>
                         </select></td>
@@ -40,5 +40,6 @@ const submitForm = () => {
             </tbody>
         </table>
     </form>
-    {{ ticketCopy }}
+    
+    {{ getAllButCategories(ticket.categories) }}
 </template>
