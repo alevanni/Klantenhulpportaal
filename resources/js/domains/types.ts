@@ -14,7 +14,7 @@ export interface Ticket {
     title: string;
     description: string;
     categories: { id: number }[];
-    status: boolean;
+    status: number;
     assigned_to: number;
     created_on: string;
     updated_on: string;

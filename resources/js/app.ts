@@ -2,6 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import { ticketRoutes } from "./domains/tickets/routes";
 import { userRoutes } from "./domains/users/routes";
+import { categoryRoutes } from "./domains/categories/routes";
 import { addRoutes } from "./services/router";
 import { useRouterInApp } from "./services/router/index";
 import { checkIfLoggedIn, setAuthRoutes } from "./services/auth";
@@ -12,7 +13,7 @@ import ForgotPassword from "./domains/auth/pages/ForgotPassword.vue";
 import Register from "./domains/auth/pages/Register.vue";
 
 setAuthRoutes(LoginPage, ForgotPassword, ResetPassword, Register);
-addRoutes([...ticketRoutes, ...userRoutes]);
+addRoutes([...ticketRoutes, ...userRoutes, ...categoryRoutes]);
 
 try {
     await checkIfLoggedIn();

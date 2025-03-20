@@ -23,7 +23,7 @@ class UpdateTicketRequest extends FormRequest
     {
         return [
             'title' => 'required|max:50',
-            'description' => 'required|max:500',
+            'description' => 'required|max:1000',
         ];
     }
 }

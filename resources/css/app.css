@@ -43,13 +43,15 @@ td {
     border-collapse: collapse;
     padding: 10px;
 }
-
-.open,
+.red {
+    background-color: lightcoral;
+}
+.yellow,
 .basic {
     background-color: orange;
 }
 
-.closed,
+.green,
 .admin {
     background-color: lightgreen;
 }
@@ -83,5 +85,20 @@ td {
 .ticket-container {
     background-color: aliceblue;
     width: 60%;
+    margin: auto;
+}
+
+.comment-author {
+    font-weight: bold;
+}
+select {
+    margin: 5px;
+    
+    background: rgb(255, 255, 255);
+    color: #000;
+  }
+  .table-container {
+    background-color: aliceblue;
+    width: 80%;
     margin: auto;
 }

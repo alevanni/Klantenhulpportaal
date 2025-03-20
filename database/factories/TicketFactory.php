@@ -22,7 +22,7 @@ class TicketFactory extends Factory
         return [
             'title' => $this->faker->sentence(4),
             'description' => $this->faker->paragraph(10),
-            'status' => $this->faker->boolean(30),
+            'status' => $this->faker->numberBetween(0, 2),
             'created_by' => User::where('admin', 0)->inRandomOrder()->first()->id,
             'assigned_to' => User::where('admin', 1)->inRandomOrder()->first()->id,
 

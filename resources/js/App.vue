@@ -24,6 +24,9 @@ import { isLoggedIn, isAdmin, getLoggedInUser } from './services/auth';
                 <RouterLink v-if="isAdmin" :to="{ name: 'users.overview' }">Users</RouterLink>
             </li>
             <li>
+                <RouterLink v-if="isAdmin" :to="{ name: 'categories.overview' }">Categories</RouterLink>
+            </li>
+            <li>
                 <Logout></Logout>
             </li>
 

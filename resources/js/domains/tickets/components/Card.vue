@@ -12,9 +12,11 @@ const { ticket } = defineProps(['ticket']);
         <td>
             <RouterLink :to="{ name: 'tickets.show', params: { id: ticket.id } }">{{ ticket.title }}</RouterLink>
             <CategoriesDisplay :categories="ticket.categories"></CategoriesDisplay>
-            <RouterLink class="edit-link" :to="{ name: 'tickets.edit', params: { id: ticket.id } }"> &#128393; Edit</RouterLink>
+            <RouterLink class="edit-link" :to="{ name: 'tickets.edit', params: { id: ticket.id } }"> &#128393; Edit
+            </RouterLink>
         </td>
-        <td :class="[(ticket.status) ? 'open' : 'closed']">{{ ticket.status ? 'Open' : 'Closed' }}</td>
+        <td :class="[(ticket.status === 0) ? 'red' : ((ticket.status === 1) ? 'yellow' : 'green')]">{{ (ticket.status
+            === 0) ? 'pending' : ((ticket.status === 1) ? 'in progress' : 'closed') }}</td>
         <td>{{ userStore.getters.byId(ticket.created_by).value?.firstName + ' ' +
             userStore.getters.byId(ticket.created_by).value?.lastName }}</td>
         <td>{{ new Intl.DateTimeFormat("en-GB").format(new Date(ticket.created_on)) }}</td>

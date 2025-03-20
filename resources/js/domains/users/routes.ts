@@ -4,6 +4,7 @@ import { User } from "../types";
 import LoginPage from "../auth/pages/LoginPage.vue";
 import Home from "../auth/pages/LoginPage.vue";
 import Overview from "./pages/Overview.vue";
+import { computed } from "vue";
 
 export const USERS_DOMAIN_NAME = "users";
 export const userRoutes = [
@@ -16,3 +17,7 @@ export const userStore = storeModuleFactory<User>(USERS_DOMAIN_NAME);
 const tickets = userStore.getters.all;
 
 export const getAllUsers = userStore.getters.all;
+
+export const getAdmins = computed(() =>
+    getAllUsers.value.filter((user) => user.isAdmin)
+);

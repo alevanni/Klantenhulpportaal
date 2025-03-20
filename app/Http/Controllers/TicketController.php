@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateTicketRequest;
 use App\Http\Resources\TicketResource;
 use Illuminate\Http\Request;
 use App\Models\Ticket;
+use Illuminate\Auth\Events\Validated;
 
 class TicketController extends Controller
 {
@@ -34,7 +35,7 @@ class TicketController extends Controller
     {
         $validated = $request->validated();
         $validated['created_by'] = $request['created_by'];
-        $validated['status'] = 1;
+
         $ticket = Ticket::create($validated);
 
         if ($request['categories'] !== []) {
@@ -72,6 +73,12 @@ class TicketController extends Controller
             $ticket->categories()->attach($request['categories']);
         }
         //check for the user
+        if ($request['assigned_to'] !== null) {
+            $validated['assigned_to'] = $request['assigned_to'];
+        }
+        if ($request['status'] !== null) {
+            $validated['status'] = $request['status'];
+        }
         $ticket->update($validated);
         return new TicketResource($ticket);
     }
