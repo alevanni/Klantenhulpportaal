@@ -18,7 +18,7 @@ const assignUser = () => {
                 {{ user.firstName + ' ' + user.lastName }}
             </option>
         </select>
-        <input type="submit" value="Save">
+        <input type="submit" value="Save &#128190;">
     </form>
 
 </template>

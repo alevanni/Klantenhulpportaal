@@ -6,8 +6,13 @@ import { getLoggedInUser } from '../../../services/auth';
 import { goToOverviewPage } from '../../../services/router';
 const newTicket = ref({ title: "", description: "", categories: [], created_by: getLoggedInUser().id })
 const addTicket = async (ticket: any) => {
-    await ticketStore.actions.create(ticket);
-    goToOverviewPage('tickets');
+    try {
+        await ticketStore.actions.create(ticket);
+        goToOverviewPage('tickets');
+    }
+    catch (e) {
+        console.log(e);
+    }
 }
 </script>
 

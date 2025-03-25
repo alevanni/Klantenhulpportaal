@@ -8,9 +8,15 @@ import { useRoute } from 'vue-router';
 ticketStore.actions.getAll();
 const ticketToEdit = ref(ticketStore.getters.byId(+useRoute().params.id));
 const editTicket = async (ticket: any) => {
-    console.log(ticket);
-    await ticketStore.actions.update(ticket.id, ticket);
-    goToOverviewPage('tickets');
+    try {
+
+        await ticketStore.actions.update(ticket.id, ticket);
+        goToOverviewPage('tickets');
+    }
+    catch (e) {
+        console.log(e);
+    }
+
 }
 </script>
 

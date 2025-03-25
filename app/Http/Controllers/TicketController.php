@@ -69,9 +69,7 @@ class TicketController extends Controller
     {
 
         $validated = $request->validated();
-        if ($request['categories'] !== []) {
-            $ticket->categories()->attach($request['categories']);
-        }
+
         //check for the user
         if ($request['assigned_to'] !== null) {
             $validated['assigned_to'] = $request['assigned_to'];
@@ -80,6 +78,16 @@ class TicketController extends Controller
             $validated['status'] = $request['status'];
         }
         $ticket->update($validated);
+        // I have to update the categories
+        if ($request['categories'] !== null) {
+            $catIds = [];
+            // i have to sync with the new ones
+            if ($request['categories'] !== []) {
+                $catIds = array_column($request['categories'], 'id');
+            }
+            $ticket->categories()->sync($catIds);
+        }
+
         return new TicketResource($ticket);
     }
 

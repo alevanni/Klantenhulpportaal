@@ -18,7 +18,7 @@ const assignStatus = () => {
             <option value=1> in progress </option>
             <option value=2> closed </option>
         </select>
-        <input type="submit" value="Save">
+        <input type="submit" value="Save &#128190;">
     </form>
 
 </template>

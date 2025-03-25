@@ -1,17 +1,23 @@
 import { computed } from "vue";
 import { storeModuleFactory } from "../../services/store";
 import { Category } from "../types";
-import { createOverviewRoute } from "../../services/router/factory";
+import {
+    createCreateRoute,
+    createEditRoute,
+    createOverviewRoute,
+} from "../../services/router/factory";
 import Overview from "./pages/Overview.vue";
+import Create from "./pages/Create.vue";
+import Edit from "./pages/Edit.vue";
 export const CATEGORIES_DOMAIN_NAME = "categories";
 export const categoryStore = storeModuleFactory<Category>(
     CATEGORIES_DOMAIN_NAME
 );
 export const categoryRoutes = [
     createOverviewRoute(CATEGORIES_DOMAIN_NAME, Overview),
-    //createCreateRoute(TICKETS_DOMAIN_NAME, Create),
+    createCreateRoute(CATEGORIES_DOMAIN_NAME, Create),
     //createShowRoute(TICKETS_DOMAIN_NAME, Show),
-    //createEditRoute(TICKETS_DOMAIN_NAME, Edit)
+    createEditRoute(CATEGORIES_DOMAIN_NAME, Edit),
 ];
 
 categoryStore.actions.getAll();

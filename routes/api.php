@@ -23,4 +23,8 @@ Route::get('/users/token/{token}', [AuthController::class, 'userByToken']);
 
 Route::post('/reset-password', [AuthController::class, 'updatePassword']);
 Route::put('/tickets/{ticket}', [TicketController::class, 'update'])->middleware('auth:sanctum');
+
 Route::post('/tickets', [TicketController::class, 'store'])->middleware('auth:sanctum');
+Route::post('/categories', [CategoryController::class, 'store'])->middleware('auth:sanctum');
+Route::put('/categories/{category}', [CategoryController::class, 'update'])->middleware('auth:sanctum');
+Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->middleware('auth:sanctum');
