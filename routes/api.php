@@ -28,3 +28,4 @@ Route::post('/tickets', [TicketController::class, 'store'])->middleware('auth:sa
 Route::post('/categories', [CategoryController::class, 'store'])->middleware('auth:sanctum');
 Route::put('/categories/{category}', [CategoryController::class, 'update'])->middleware('auth:sanctum');
 Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->middleware('auth:sanctum');
+Route::post('/comments', [CommentController::class, 'store'])->middleware('auth:sanctum');

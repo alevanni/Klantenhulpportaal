@@ -67,7 +67,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->tickets()->detach();
-        $category->delete();
+        if ($category->tickets()->get()->count() === 0) {
+            $category->tickets()->detach();
+            $category->delete();
+            //$categories = Category::all();
+
+        } else return response()->json(["message" => "This category is attached to tickets, you cannot delete it!!"], 400);
     }
 }

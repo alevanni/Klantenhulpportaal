@@ -12,9 +12,15 @@ const submit = () => {
 </script>
 
 <template>
-    <h1>Do you want to cancel {{ categoryStore.getters.byId(form).value.name }}?</h1>
+    <h1>Do you want to delete the tag "{{ categoryStore.getters.byId(form).value.name }}"?</h1>
     <form>
-        <button @click="canc">Cancel</button>
-        <button @click="submit">Submit</button>
+        <table>
+            <tr>
+                <td><button @click="canc">No, I changed my mind</button></td>
+            <td><button @click="submit">Yes, delete it</button></td>
+            </tr>
+        </table>
+        
+        
     </form>
 </template>

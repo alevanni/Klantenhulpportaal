@@ -1,4 +1,4 @@
--   How do I stop unauthorized users? Do I have to do it with sanctum?
+-   How do I stop unauthorized users? Do I have to do it with sanctum? (no, frontend is fine)
 -   How do i handle the categories in the edit?
 -   I had to change the RequestPasswordData type so that it has the email inside
 -   what is guest login for?

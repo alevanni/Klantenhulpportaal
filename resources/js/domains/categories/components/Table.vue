@@ -9,8 +9,13 @@ import Modal from './Modal.vue';
 import { categoryStore } from '../routes';
 //const modal = ;
 const deleteCategory = async (id: number) => {
-    await categoryStore.actions.delete(id);
-    console.log('delete ' + id);
+    try {
+        await categoryStore.actions.delete(id);
+    }
+    catch(e) {
+        console.log(e);
+    }
+    
 }
 </script>
 

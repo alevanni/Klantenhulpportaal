@@ -8,11 +8,14 @@ import Table from '../../comments/components/Table.vue'
 import CategoriesDisplay from '../../categories/components/CategoriesDisplay.vue';
 import AssignmentForm from '../components/AssignmentForm.vue';
 import StatusForm from '../components/StatusForm.vue';
+import CommentForm from '../../comments/components/CommentForm.vue';
+import { ref } from 'vue';
 ticketStore.actions.getAll();
 userStore.actions.getAll();
 commentStore.actions.getAll();
 const ticket = ticketStore.getters.byId(+useRoute().params.id);
 
+const newComment = ref({ticket_id: +useRoute().params.id, created_by: getLoggedInUser().id, body: ""});
 const updateAssignedUser = async (ticket: any) => {
     console.log(ticket);
 
@@ -24,7 +27,18 @@ const updateAssignedStatus = async (ticket: any) => {
 
     await ticketStore.actions.update(ticket.id, ticket)
 }
+
+const addComment = async (comment: any) => {
+   try {
+    await commentStore.actions.create(comment);
+    
+   }
+   catch(e) {
+    console.log(e);
+   }
+}
 </script>
+
 
 <template>
     <div class="ticket-container"
@@ -40,17 +54,12 @@ const updateAssignedStatus = async (ticket: any) => {
                 Edit
             </RouterLink>
         </p>
-
-        <!---  <p>Status: <span :class="[(ticket.status === 0) ? 'red' : ((ticket.status === 1) ? 'yellow' : 'green')]">{{
-            (ticket.status === 0) ? 'pending' : ((ticket.status === 1) ? 'in progress' : 'closed') }}</span> -
-            Currently assigned to: {{ userStore.getters.byId(ticket.assigned_to).value?.firstName + ' ' +
-                userStore.getters.byId(ticket.assigned_to).value?.lastName }}</p>
-                -->
         <AssignmentForm v-if="getLoggedInUser().isAdmin" :ticket="ticket" @assign_user="updateAssignedUser">
         </AssignmentForm>
         <StatusForm v-if="getLoggedInUser().isAdmin" :ticket="ticket" @assign_status="updateAssignedStatus">
         </StatusForm>
         <Table :comments="commentsByTicketId(ticket.id)"></Table>
+        <CommentForm :comment="newComment" @submit-comment="addComment"></CommentForm>
     </div>
 
 

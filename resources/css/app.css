@@ -43,9 +43,11 @@ td {
     border-collapse: collapse;
     padding: 10px;
 }
+
 .red {
     background-color: lightcoral;
 }
+
 .yellow,
 .basic {
     background-color: orange;
@@ -69,7 +71,9 @@ td {
     margin: 5px;
 }
 
-.edit-link, .new, .delete-link {
+.edit-link,
+.new,
+.delete-link {
     text-decoration: none;
     margin: 10px;
     border: 1px solid black;
@@ -77,14 +81,17 @@ td {
     border-radius: 10px;
 }
 
-.edit-link:hover, .new:hover {
+.edit-link:hover,
+.new:hover {
     background-color: cornflowerblue;
     color: white;
 }
+
 .delete-link:hover {
     background-color: red;
     color: white;
 }
+
 .ticket-container {
     background-color: aliceblue;
     width: 60%;
@@ -94,13 +101,24 @@ td {
 .comment-author {
     font-weight: bold;
 }
+
+.comment-text {
+    width: 100%;
+}
+
+.new-comment {
+    width: 100%;
+
+}
+
 select {
     margin: 5px;
-    
+
     background: rgb(255, 255, 255);
     color: #000;
-  }
-  .table-container {
+}
+
+.table-container {
     background-color: aliceblue;
     width: 80%;
     margin: auto;
