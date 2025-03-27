@@ -10,12 +10,17 @@ import AssignmentForm from '../components/AssignmentForm.vue';
 import StatusForm from '../components/StatusForm.vue';
 import CommentForm from '../../comments/components/CommentForm.vue';
 import { ref } from 'vue';
+
 ticketStore.actions.getAll();
 userStore.actions.getAll();
 commentStore.actions.getAll();
+
 const ticket = ticketStore.getters.byId(+useRoute().params.id);
 
-const newComment = ref({ticket_id: +useRoute().params.id, created_by: getLoggedInUser().id, body: ""});
+const newComment = ref({ ticket_id: +useRoute().params.id, created_by: getLoggedInUser().id, body: "" });
+
+const key = ref(0);
+
 const updateAssignedUser = async (ticket: any) => {
     console.log(ticket);
 
@@ -29,13 +34,15 @@ const updateAssignedStatus = async (ticket: any) => {
 }
 
 const addComment = async (comment: any) => {
-   try {
-    await commentStore.actions.create(comment);
-    
-   }
-   catch(e) {
-    console.log(e);
-   }
+    try {
+        await commentStore.actions.create(comment);
+
+        key.value = key.value + 1;
+        //console.log(key);
+    }
+    catch (e) {
+        console.log(e);
+    }
 }
 </script>
 
@@ -59,7 +66,8 @@ const addComment = async (comment: any) => {
         <StatusForm v-if="getLoggedInUser().isAdmin" :ticket="ticket" @assign_status="updateAssignedStatus">
         </StatusForm>
         <Table :comments="commentsByTicketId(ticket.id)"></Table>
-        <CommentForm :comment="newComment" @submit-comment="addComment"></CommentForm>
+        <CommentForm :comment="newComment" :key="key" @submit-comment="addComment"></CommentForm>
+
     </div>
 
 

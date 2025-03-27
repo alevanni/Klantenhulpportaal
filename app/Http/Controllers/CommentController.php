@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCommentRequest;
+use App\Http\Requests\UpdateCommentRequest;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Http\Resources\CommentResource;
+use App\Mail\NewComment;
+use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
@@ -33,6 +36,9 @@ class CommentController extends Controller
     {
         $validated = $request->validated();
         $comment = Comment::create($validated);
+        $ticket = $comment->ticket();
+        $assignee = $ticket->assignedTo();
+        Mail::to($assignee)->send(new NewComment($ticket, $comment));
         return new CommentResource($comment);
     }
 
@@ -55,9 +61,11 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCommentRequest $request, Comment $comment)
     {
-        //
+        $validated = $request->validated();
+        $comment->update($validated);
+        return new CommentResource($comment);
     }
 
     /**

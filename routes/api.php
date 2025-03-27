@@ -29,3 +29,4 @@ Route::post('/categories', [CategoryController::class, 'store'])->middleware('au
 Route::put('/categories/{category}', [CategoryController::class, 'update'])->middleware('auth:sanctum');
 Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->middleware('auth:sanctum');
 Route::post('/comments', [CommentController::class, 'store'])->middleware('auth:sanctum');
+Route::put('/comments/{comment}', [CommentController::class, 'update'])->middleware('auth:sanctum');
