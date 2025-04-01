@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NoteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,7 @@ Route::get('/tickets', [TicketController::class, 'index'])->middleware('auth:san
 Route::get('/tickets/{id}', [TicketController::class, 'show'])->middleware('auth:sanctum');
 Route::get('/users', [UserController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/comments', [CommentController::class, 'index'])->middleware('auth:sanctum');
+Route::get('/notes', [NoteController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/users/token/{token}', [AuthController::class, 'userByToken']);
 
 Route::post('/reset-password', [AuthController::class, 'updatePassword']);
@@ -29,4 +31,6 @@ Route::post('/categories', [CategoryController::class, 'store'])->middleware('au
 Route::put('/categories/{category}', [CategoryController::class, 'update'])->middleware('auth:sanctum');
 Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->middleware('auth:sanctum');
 Route::post('/comments', [CommentController::class, 'store'])->middleware('auth:sanctum');
+Route::post('/notes', [NoteController::class, 'store'])->middleware('auth:sanctum');
 Route::put('/comments/{comment}', [CommentController::class, 'update'])->middleware('auth:sanctum');
+Route::put('/notes/{note}', [NoteController::class, 'update'])->middleware('auth:sanctum');

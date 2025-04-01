@@ -63,7 +63,7 @@ class AuthController extends Controller
         $request->validate(['email' => 'required|email']);
 
         $user = User::where('email', '=', $request->email)->first();
-        echo $user;
+        //echo $user;
         if ($user) {
             $token = (new PasswordReset)->create($user);
             Mail::to($user)->send(new ResetPasswordLink($token, $user));

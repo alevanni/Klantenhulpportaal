@@ -24,11 +24,11 @@ class Ticket extends Model
 
     public function createdBy()
     {
-        return $this->belongsToMany(User::class)->where('admin', 0);
+        return $this->belongsTo(User::class, 'created_by');
     }
     public function assignedTo()
     {
-        return $this->belongsToMany(User::class)->where('admin', 1);
+        return $this->belongsTo(User::class, 'assigned_to');
     }
     public function categories()
     {

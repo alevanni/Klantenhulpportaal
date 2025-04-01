@@ -6,12 +6,12 @@ import { LoginCredentials } from '../../../services/auth/types';
 const newCredentials = ref<LoginCredentials>({ email: "", password: "", rememberMe: false });
 
 const submitLogin = async () => {
-    // try {        
+    try {
         await login(newCredentials.value);
-    // } catch (error) {
-        // console.log(error);        
+    } catch (error) {
+        console.log(error);
     }
-// }
+}
 </script>
 
 <template>
@@ -19,18 +19,18 @@ const submitLogin = async () => {
     <form>
         <table>
             <tbody>
-            <tr>
-                <td><label for="email">Email</label></td>
-                <td><input id="email" v-model="newCredentials.email"></td>
-            </tr>
-            <tr>
-                <td><label for="password">Password</label></td>
-                <td><input id="password" v-model="newCredentials.password"></td>
-            </tr>
-            <tr>
-                <td><button @click.prevent="submitLogin">Submit</button></td>
-            </tr>
-        </tbody>
+                <tr>
+                    <td><label for="email">Email</label></td>
+                    <td><input id="email" v-model="newCredentials.email"></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password</label></td>
+                    <td><input id="password" v-model="newCredentials.password"></td>
+                </tr>
+                <tr>
+                    <td><button @click.prevent="submitLogin">Submit</button></td>
+                </tr>
+            </tbody>
         </table>
     </form>
     <RouterLink :to="{ name: 'ForgotPassword' }">Forgot your password?</RouterLink>

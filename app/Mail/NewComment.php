@@ -10,6 +10,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use App\Models\Ticket;
 use App\Models\Comment;
+use App\Models\User;
 
 class NewComment extends Mailable
 {
@@ -18,7 +19,7 @@ class NewComment extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(protected Ticket $ticket, protected Comment $comment)
+    public function __construct(protected Ticket $ticket, protected Comment $comment, protected User $sender, protected User $receiver)
     {
         //
     }
@@ -29,7 +30,7 @@ class NewComment extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Comment',
+            subject: 'New Comment from ' . $this->sender->first_name . ' ' . $this->sender->last_name,
         );
     }
 
@@ -40,6 +41,14 @@ class NewComment extends Mailable
     {
         return new Content(
             view: 'mail.new-comment',
+            with: [
+                'receiverName' => $this->receiver->first_name . ' ' . $this->receiver->last_name,
+                'commentBody' => $this->comment->body,
+                'senderName' => $this->sender->first_name . ' ' . $this->sender->last_name,
+                'senderEmail' => $this->sender->email,
+                'ticketId' => $this->ticket->id,
+                'ticketTitle' => $this->ticket->title
+            ]
         );
     }
 

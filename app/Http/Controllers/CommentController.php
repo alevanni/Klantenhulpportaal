@@ -9,6 +9,7 @@ use App\Models\Comment;
 use App\Http\Resources\CommentResource;
 use App\Mail\NewComment;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -36,9 +37,27 @@ class CommentController extends Controller
     {
         $validated = $request->validated();
         $comment = Comment::create($validated);
-        $ticket = $comment->ticket();
-        $assignee = $ticket->assignedTo();
-        Mail::to($assignee)->send(new NewComment($ticket, $comment));
+        $ticket = $comment->ticket;
+        $sender = Auth::user();
+
+        // I am the creator of the ticket, the message goes to the assigned admin
+        if ($sender->id == $ticket->created_by) {
+            $assignee = $ticket->assignedTo;
+            Mail::to($assignee)->send(new NewComment($ticket, $comment, $sender, $assignee));
+        }
+        // I am the assigned admin, the message goes to the creator
+        else if ($sender->id == $ticket->assigned_to) {
+            $creator = $ticket->createdBy;
+            Mail::to($creator)->send(new NewComment($ticket, $comment, $sender, $creator));
+        }
+        // I am a generic admin, the message goes to BOTH assignee AND creator
+        else {
+            $assignee = $ticket->assignedTo;
+            $creator = $ticket->createdBy;
+            Mail::to($assignee)->send(new NewComment($ticket, $comment, $sender, $assignee));
+            Mail::to($creator)->send(new NewComment($ticket, $comment, $sender, $creator));
+        }
+
         return new CommentResource($comment);
     }
 

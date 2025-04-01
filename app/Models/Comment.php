@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Comment extends Model
 {
@@ -19,12 +20,12 @@ class Comment extends Model
         'body',
     ];
 
-    public function ticket()
+    public function ticket(): BelongsTo
     {
-        return $this->belongsTo(Ticket::class);
+        return $this->belongsTo(Ticket::class, 'ticket_id');
     }
-    public function createdBy()
+    public function createdBy(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'created_by');
     }
 }
