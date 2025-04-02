@@ -34,3 +34,4 @@ Route::post('/comments', [CommentController::class, 'store'])->middleware('auth:
 Route::post('/notes', [NoteController::class, 'store'])->middleware('auth:sanctum');
 Route::put('/comments/{comment}', [CommentController::class, 'update'])->middleware('auth:sanctum');
 Route::put('/notes/{note}', [NoteController::class, 'update'])->middleware('auth:sanctum');
+Route::delete('/notes/{note}', [NoteController::class, 'destroy'])->middleware('auth:sanctum');

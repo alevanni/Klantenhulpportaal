@@ -7,8 +7,22 @@ const { users } = defineProps(['users']);
 <template>
     <div class="table">
         
-
-        <Card v-for="user in users" :key="user.id" :user="user"></Card>
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Telephone number (to be done)</th>
+        </tr>
+       
+    </thead>
+    <tbody>
+        <Card v-for="user in users" :key="user.id" :user="user"></Card> 
+    </tbody>
+</table>
+      
 
 
     </div>

@@ -36,13 +36,14 @@ nav ul li {
 
 }
 
-.overview table,
-th,
-td {
+table,
+td,
+thead th {
     border: 1px solid black;
     border-collapse: collapse;
     padding: 10px;
 }
+
 
 .red {
     background-color: lightcoral;
@@ -104,19 +105,23 @@ td {
 
 .comment-text {
     width: 100%;
-    
+
 }
 
 .new-comment {
     width: 100%;
 
 }
-.new-comment td, th {
+
+.new-comment td,
+th {
     border: none;
 }
-.wide-table{
-    width:100%;
+
+.wide-table {
+    width: 100%;
 }
+
 select {
     margin: 5px;
 
@@ -129,9 +134,10 @@ select {
     width: 80%;
     margin: auto;
 }
+
 .send {
-    font-size:20px;
+    font-size: 20px;
     border: 1px solid black;
-    
+
     border-radius: 10px;
 }

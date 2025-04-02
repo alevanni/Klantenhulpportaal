@@ -70,8 +70,7 @@ class CategoryController extends Controller
         if ($category->tickets()->get()->count() === 0) {
             $category->tickets()->detach();
             $category->delete();
-            //$categories = Category::all();
-
+            return response()->json(["message" => "Category successfully deleted"], 200);
         } else return response()->json(["message" => "This category is attached to tickets, you cannot delete it!!"], 400);
     }
 }

@@ -1,22 +1,7 @@
 <script setup lang="ts">
+import Card from './Card.vue';
 const { categories } = defineProps(['categories']);
-import DeletionForm from './DeletionForm.vue';
-//import Modal from './Modal.vue';
-//import { confirmModal } from '../../../services/modal';
-import { formModal } from '../../../services/modal';
-import FormModal from '../../../services/modal/dom/FormModal.vue';
-import Modal from './Modal.vue';
-import { categoryStore } from '../routes';
-//const modal = ;
-const deleteCategory = async (id: number) => {
-    try {
-        await categoryStore.actions.delete(id);
-    }
-    catch(e) {
-        console.log(e);
-    }
-    
-}
+
 </script>
 
 <template>
@@ -31,16 +16,7 @@ const deleteCategory = async (id: number) => {
             </tr>
         </thead>
         <tbody>
-            <tr v-for="category in categories" :key="category.id">
-                <td>{{ category.id }}</td>
-                <td>{{ category.name }} <RouterLink class="edit-link"
-                        :to="{ name: 'categories.edit', params: { id: category.id } }"> &#128393; Edit
-                    </RouterLink>
-                    <button class="delete-link" @click="formModal(category.id, DeletionForm, deleteCategory)"> Delete
-                        &#128465;</button>
-                </td>
-
-            </tr>
+            <Card v-for="category in categories" :key="category.id" :category="category"></Card>
         </tbody>
     </table>
 

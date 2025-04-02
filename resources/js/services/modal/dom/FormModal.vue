@@ -1,5 +1,5 @@
 <template>
-    <div ref="modalTemplate" class="fade modal" tabindex="-1" aria-labelledby="label" aria-hidden="true">
+    <div ref="modalTemplate" class="fade modal" tabindex="-1" aria-labelledby="label" aria-hidden="false">
         <div class="modal-dialog" :class="`modal-${modal.size}`">
             <div class="modal-content">
                 <div class="modal-body">
@@ -34,7 +34,12 @@ onMounted(() => {
 });
 
 const submit = async (form: unknown) => {
-    await props.modal.submitEvent(form);
+    try {
+        await props.modal.submitEvent(form);
+    }
+    catch(e) {
+        console.log(e);
+    }
     close();
 };
 </script>

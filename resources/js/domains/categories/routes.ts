@@ -20,7 +20,7 @@ export const categoryRoutes = [
     createEditRoute(CATEGORIES_DOMAIN_NAME, Edit),
 ];
 
-categoryStore.actions.getAll();
+//categoryStore.actions.getAll();
 const categories = categoryStore.getters.all;
 
 export const getAllCategories = categoryStore.getters.all;

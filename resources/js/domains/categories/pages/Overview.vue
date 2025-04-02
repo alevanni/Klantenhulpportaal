@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getLoggedInUser, isAdmin } from '../../../services/auth';
+import { isAdmin } from '../../../services/auth';
 import Table from '../components/Table.vue';
 import { categoryStore, getAllCategories } from '../routes';
 categoryStore.actions.getAll();
@@ -11,7 +11,7 @@ categoryStore.actions.getAll();
         </h1>
         <h3>
             <RouterLink :to="{ name: 'categories.create' }" class="new">
-                Add &#127991;</RouterLink>
+                &#127991; Add </RouterLink>
         </h3>
 
         <Table :categories="getAllCategories.sort((a, b) => a.name.localeCompare(b.name))"></Table>

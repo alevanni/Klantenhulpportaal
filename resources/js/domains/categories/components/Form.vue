@@ -16,7 +16,7 @@ const submitCategoryForm = () => {
                 <tr>
                     <td><label for="name">Name:</label></td>
                     <td><input id="name" type="text" v-model="categoryCopy.name"></td>
-                    <td><input type="submit" value="Save &#128190;"></td>
+                    <td><input type="submit" value="&#128190; Save"></td>
                 </tr>
             </tbody>
         </table>

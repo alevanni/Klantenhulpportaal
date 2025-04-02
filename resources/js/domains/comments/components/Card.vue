@@ -36,7 +36,7 @@ const updateComment = async (comment: any) => {
             userStore.getters.byId(comment.created_by).value?.lastName + " on " + new
                 Intl.DateTimeFormat("en-GB").format(new Date(comment.created_on)) }}:</span> <br>{{
                     comment.body }} <button v-if="comment.created_by === getLoggedInUser().id" class="edit-link"
-                @click="editComment">Edit &#128393;</button></td>
+                @click="editComment">&#128393; Edit </button></td>
         <td v-else>
             <CommentForm :comment="comment" @submit-comment="updateComment" @close="closeForm"></CommentForm>
         </td>
