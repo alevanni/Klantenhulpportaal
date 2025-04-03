@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
             'last_name' => 'User',
             'email' => 'test@example.com',
             'admin' => 1,
+            'telephone' => '0600000000',
         ]);
         User::factory()->count(50)->create();
     }

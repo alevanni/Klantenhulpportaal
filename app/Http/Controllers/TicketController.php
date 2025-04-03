@@ -48,9 +48,9 @@ class TicketController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Ticket $ticket)
     {
-        $ticket = Ticket::find($id);
+        //$ticket = Ticket::find($id);
         return new TicketResource($ticket);
     }
 

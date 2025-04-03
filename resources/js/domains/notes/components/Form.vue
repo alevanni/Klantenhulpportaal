@@ -35,7 +35,7 @@ const close = () => {
                 <tr>
                     <td><input class="send" type="submit" value="&#128190; Save">
                     </td>
-                    <td v-if="(note.body)"><button class="send" @click="close">&#10060; Cancel</button></td>
+                    <td v-if="(note.body)"><button class="send" @click.prevent="close">&#10060; Cancel</button></td>
                 </tr>
             </tbody>
         </table>

@@ -141,3 +141,50 @@ select {
 
     border-radius: 10px;
 }
+
+.edit-user {
+
+    padding:0px;
+    width:100%;
+}
+.edit-user table {
+    border: none;
+    width:100%;
+}
+.edit-user-row {
+    width:100%;
+   
+}
+.edit-user-form {
+    background-color: darksalmon;
+    width:100%;
+    padding:0px;
+}
+.table-id {
+    
+    text-align: center;
+    padding: 0px;
+    width:10%;
+    
+}
+
+.table-name, .table-email, .table-telephone {
+    width:15%;
+    padding: 1%;
+    justify-content: center;
+}
+
+.table-role{
+    width:10%;
+    padding: 0px;
+}
+
+.table-button {
+    width:20%;
+    padding-top: 10px;
+    justify-content: center;
+}
+.text-input {
+    background-color: aquamarine;
+    width:98%;
+}
