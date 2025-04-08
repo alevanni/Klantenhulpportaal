@@ -31,7 +31,7 @@ class UserFactory extends Factory
             'admin' => fake()->boolean(5),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
-            'telephone' => fake()->numerify('06-########'),
+            'telephone' => fake()->numerify('06########'),
         ];
     }
 

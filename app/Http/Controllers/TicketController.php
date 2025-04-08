@@ -39,7 +39,8 @@ class TicketController extends Controller
         $ticket = Ticket::create($validated);
 
         if ($request['categories'] !== []) {
-            $ticket->categories()->attach($request['categories']);
+            $catIds = array_column($request['categories'], 'id');
+            $ticket->categories()->attach($catIds);
         }
         //$tickets = Ticket::orderBy('created_at', 'desc')->get();
         return new TicketResource($ticket);

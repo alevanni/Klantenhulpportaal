@@ -33,5 +33,14 @@ const submitLogin = async () => {
             </tbody>
         </table>
     </form>
-    <RouterLink :to="{ name: 'ForgotPassword' }">Forgot your password?</RouterLink>
+    <ul>
+        <li>
+            <RouterLink :to="{ name: 'ForgotPassword' }">Forgot your password?</RouterLink>
+        </li>
+        <li>
+            <RouterLink :to="{ name: 'Register' }">Register</RouterLink>
+        </li>
+    </ul>
+
+
 </template>

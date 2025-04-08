@@ -4,6 +4,7 @@ import EditForm from './EditForm.vue';
 import { userStore } from '../routes';
 import DeletionForm from './DeletionForm.vue';
 import { formModal } from '../../../services/modal';
+import { ticketStore } from '../../tickets/routes';
 const { user } = defineProps(['user']);
 const edit = ref(0);
 
@@ -22,9 +23,18 @@ const updateUser = async (user: any) => {
 
 }
 
-const deleteUser = async (user: any) => {
-    console.log('delete')
+const deleteUser = async (id: number) => {
+    try {
+        await userStore.actions.delete(id);
+        ticketStore.actions.getAll(); //i have to refresh the tickets CHECK IF IT ACTUALLY WORKS -- IT DOES NOT
+        ticketStore.getters.all;
+    }
+    catch (e) {
+        console.log(e);
+    }
+
 }
+
 </script>
 
 <template>

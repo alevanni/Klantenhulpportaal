@@ -156,7 +156,7 @@ select {
    
 }
 .edit-user-form {
-    background-color: darksalmon;
+    
     width:100%;
     padding:0px;
 }
@@ -185,6 +185,9 @@ select {
     justify-content: center;
 }
 .text-input {
-    background-color: aquamarine;
+ background-color: rgb(206, 203, 203);
     width:98%;
+}
+.register-table input {
+    background-color: rgb(241, 233, 233);
 }

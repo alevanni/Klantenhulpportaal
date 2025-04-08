@@ -43,7 +43,9 @@ class CommentController extends Controller
         // I am the creator of the ticket, the message goes to the assigned admin
         if ($sender->id == $ticket->created_by) {
             $assignee = $ticket->assignedTo;
-            Mail::to($assignee)->send(new NewComment($ticket, $comment, $sender, $assignee));
+            if ($assignee != null) {
+                Mail::to($assignee)->send(new NewComment($ticket, $comment, $sender, $assignee));
+            }
         }
         // I am the assigned admin, the message goes to the creator
         else if ($sender->id == $ticket->assigned_to) {
@@ -54,7 +56,10 @@ class CommentController extends Controller
         else {
             $assignee = $ticket->assignedTo;
             $creator = $ticket->createdBy;
-            Mail::to($assignee)->send(new NewComment($ticket, $comment, $sender, $assignee));
+            if ($assignee != null) {
+                Mail::to($assignee)->send(new NewComment($ticket, $comment, $sender, $assignee));
+            }
+
             Mail::to($creator)->send(new NewComment($ticket, $comment, $sender, $creator));
         }
 

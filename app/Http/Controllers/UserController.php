@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -29,9 +34,16 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        $validated = $request->validated();
+        $validated['admin'] = 0;
+        $validated['password'] = Hash::make($request['password']);
+        //$validated['remember_token'] = Str::random(10); NOT WORKING
+
+        $user = User::create($validated);
+        Mail::to($user)->send(new WelcomeMail($user));
+        return new UserResource($user);
     }
 
     /**
@@ -67,8 +79,12 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        if ($user->tickets()->where('status', '<', 2)->count() === 0) {
+            $user->tickets()->delete();
+            $user->delete();
+            return response()->json(["message" => "User successfully deleted"], 200);
+        } else return response()->json(["message" => "This user has unresolved tickets, you cannot delete it!!"], 400);
     }
 }
