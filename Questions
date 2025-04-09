@@ -1,4 +1,7 @@
-- there are problems with the aria hidden
+- Exceptions?
+- Check why the refreshing of the tickets does not work after deleting user
+- Remember token?
+- there are problems with the aria hidden 
 - the categories completely reload when i delete one. why? (solved)
 
 -   Who can edit the comments? only the admins? why? Only their own comments, i suppose (no, everybody can edit their own comments)

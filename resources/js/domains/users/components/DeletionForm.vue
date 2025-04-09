@@ -14,7 +14,7 @@ const submit = () => {
 <template>
     <h1>Do you want to delete the user "{{ userStore.getters.byId(form).value?.firstName + ' ' +
         userStore.getters.byId(form).value?.lastName }}"?</h1>
-    <form @submit.prevent="">
+    <form @submit="">
         <table>
             <tbody>
                 <tr>

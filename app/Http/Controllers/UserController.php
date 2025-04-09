@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UserController extends Controller
 {
@@ -81,10 +82,26 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        if ($user->tickets()->where('status', '<', 2)->exists()) {
+            throw new HttpResponseException(response()->json([
+                'message' => 'This user has unresolved tickets, you cannot delete them!!'
+            ], 400));
+        }
+        foreach ($user->tickets as $ticket) {
+            $ticket->categories()->detach();
+        }
+        $user->tickets()->delete();
+        $user->delete();
+        return response()->json(["message" => "User successfully deleted"], 200);
+        /*
         if ($user->tickets()->where('status', '<', 2)->count() === 0) {
+
+            foreach ($user->tickets as $ticket) {
+                $ticket->categories()->detach();
+            }
             $user->tickets()->delete();
             $user->delete();
             return response()->json(["message" => "User successfully deleted"], 200);
-        } else return response()->json(["message" => "This user has unresolved tickets, you cannot delete it!!"], 400);
+        } else return response()->json(["message" => "This user has unresolved tickets, you cannot delete it!!"], 400);*/
     }
 }

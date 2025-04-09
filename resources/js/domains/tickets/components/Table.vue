@@ -1,12 +1,15 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { compare } from '../../../services/helpers/sort';
 import Card from './Card.vue';
+import { Ticket } from '../../types';
 const { tickets } = defineProps(['tickets']);
-
+//const sortedTickets = tickets.sort((a: Ticket, b: Ticket) => compare(new Date(a.updated_on), new Date(b.updated_on)));
+//console.log(sortedTickets.value)
 </script>
 
 <template>
-    <div class="table">
+    <div class="table" >
         <table>
             <thead>
             <tr>

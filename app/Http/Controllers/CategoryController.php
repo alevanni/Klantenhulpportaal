@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CategoryController extends Controller
 {
@@ -67,10 +68,13 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        if ($category->tickets()->get()->count() === 0) {
-            $category->tickets()->detach();
-            $category->delete();
-            return response()->json(["message" => "Category successfully deleted"], 200);
-        } else return response()->json(["message" => "This category is attached to tickets, you cannot delete it!!"], 400);
+        if ($category->tickets()->exists()) {
+            throw new HttpResponseException(response()->json([
+                'message' => 'This category is attached to tickets, you cannot delete it!!'
+            ], 400));
+        }
+        $category->tickets()->detach();
+        $category->delete();
+        return response()->json(["message" => "Category successfully deleted"], 200);
     }
 }
