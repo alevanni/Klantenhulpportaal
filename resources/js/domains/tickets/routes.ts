@@ -18,7 +18,7 @@ export const ticketRoutes = [
     createOverviewRoute(TICKETS_DOMAIN_NAME, Overview),
     createCreateRoute(TICKETS_DOMAIN_NAME, Create),
     createShowRoute(TICKETS_DOMAIN_NAME, Show),
-    createEditRoute(TICKETS_DOMAIN_NAME, Edit)
+    createEditRoute(TICKETS_DOMAIN_NAME, Edit),
 ];
 
 export const ticketStore = storeModuleFactory<Ticket>(TICKETS_DOMAIN_NAME);

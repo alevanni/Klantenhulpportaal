@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
-use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Http\Resources\CommentResource;
 use App\Mail\NewComment;

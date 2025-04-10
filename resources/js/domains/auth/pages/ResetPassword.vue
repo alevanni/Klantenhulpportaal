@@ -14,7 +14,7 @@ const setup = async () => {
     }
 }
 setup();
-//
+
 
 
 const updatePassword = async (token: string, email: string, newPassword: string, password_confirmation: string) => {

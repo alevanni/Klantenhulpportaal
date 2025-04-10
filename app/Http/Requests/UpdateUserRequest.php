@@ -21,11 +21,13 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this['id'];
         return [
-            'firstName' => 'required',
-            'lastName' => 'required',
-            'email' => 'required',
-            'telephone' => 'required',
+            'id' => 'required',
+            'firstName' => 'required|max:30|alpha',
+            'lastName' => 'required|max:30|alpha',
+            'email' => 'required|email:rfc,dns|unique:users,email,' . $id,
+            'telephone' => 'required|regex:/^\d{10}$/|size:10',
             'isAdmin' => 'required'
         ];
     }

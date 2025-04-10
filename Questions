@@ -1,9 +1,12 @@
-- Exceptions?
-- Check why the refreshing of the tickets does not work after deleting user
-- Remember token?
-- there are problems with the aria hidden 
-- the categories completely reload when i delete one. why? (solved)
+-   I can also authorize the user through the request, should I do it?
+-   where should the fetching action go? (solved)
+-   In the new assignements there is the directive of always pulling out the complete set of data from the backend, but in the service folder that I used, the store updates by id (fine as it was)
+-   Exceptions? (I used them)
+-   Check why the refreshing of the tickets does not work after deleting user
+-   Remember token? (no)
+-   there are problems with the aria hidden (leave them)
 
+-   the categories completely reload when i delete one. why? (solved)
 -   Who can edit the comments? only the admins? why? Only their own comments, i suppose (no, everybody can edit their own comments)
 -   How do I stop unauthorized users? Do I have to do it with sanctum? (no, frontend is fine)
 -   How do i handle the categories in the edit? (with sync)

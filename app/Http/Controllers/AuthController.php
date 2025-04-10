@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdatePasswordRequest;
-use Illuminate\Support\Facades\Password;
 use App\Http\Resources\UserResource;
 use App\Mail\ResetPasswordLink;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
@@ -32,7 +30,7 @@ class AuthController extends Controller
 
             $request->session()->regenerate();
 
-            return new UserResource(Auth::user());; //UserResource::collection($user);
+            return new UserResource(Auth::user());
         }
 
         return response()->json(["message" => "The provided credentials do not match our records."], 401);
@@ -63,7 +61,7 @@ class AuthController extends Controller
         $request->validate(['email' => 'required|email']);
 
         $user = User::where('email', '=', $request->email)->first();
-        //echo $user;
+
         if ($user) {
             $token = (new PasswordReset)->create($user);
             Mail::to($user)->send(new ResetPasswordLink($token, $user));

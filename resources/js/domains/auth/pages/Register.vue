@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { userStore } from '../../users/routes';
-import { goToLoginPage } from '../../../services/auth';
+import { goToLoginPage, register } from '../../../services/auth';
 const newUser = ref({ first_name: '', last_name: '', email: '', password: '', telephone: '' });
-
+/*
 const register = async (user: any) => {
     try {
         await userStore.actions.create(user);
@@ -14,12 +14,22 @@ const register = async (user: any) => {
     }
 
 
+}*/
+
+const submitNewUser = async (user: any) => {
+    try {
+        await register(user);
+        goToLoginPage();
+    }
+    catch (e) {
+        console.log(e);
+    }
 }
 </script>
 
 <template>
     <h1>Register</h1>
-    <form @submit.prevent="register(newUser)">
+    <form @submit.prevent="submitNewUser(newUser)">
         <table class="register-table">
             <tbody>
                 <tr>

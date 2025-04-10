@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTicketRequest;
 use App\Http\Requests\UpdateTicketRequest;
 use App\Http\Resources\TicketResource;
-use Illuminate\Http\Request;
 use App\Models\Ticket;
-use Illuminate\Auth\Events\Validated;
 
 class TicketController extends Controller
 {
@@ -42,7 +40,7 @@ class TicketController extends Controller
             $catIds = array_column($request['categories'], 'id');
             $ticket->categories()->attach($catIds);
         }
-        //$tickets = Ticket::orderBy('created_at', 'desc')->get();
+
         return new TicketResource($ticket);
     }
 
@@ -51,7 +49,6 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        //$ticket = Ticket::find($id);
         return new TicketResource($ticket);
     }
 
@@ -71,7 +68,7 @@ class TicketController extends Controller
 
         $validated = $request->validated();
 
-        //check for the user
+        //checks for the user
         if ($request['assigned_to'] !== null) {
             $validated['assigned_to'] = $request['assigned_to'];
         }
@@ -79,10 +76,11 @@ class TicketController extends Controller
             $validated['status'] = $request['status'];
         }
         $ticket->update($validated);
-        // I have to update the categories
+
+        // The form has a category field
         if ($request['categories'] !== null) {
             $catIds = [];
-            // i have to sync with the new ones
+            // I have to sync with the new ones
             if ($request['categories'] !== []) {
                 $catIds = array_column($request['categories'], 'id');
             }

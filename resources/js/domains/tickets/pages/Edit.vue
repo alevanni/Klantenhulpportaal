@@ -5,7 +5,9 @@ import Form from '../components/Form.vue';
 import { getLoggedInUser } from '../../../services/auth';
 import { goToOverviewPage } from '../../../services/router';
 import { useRoute } from 'vue-router';
+import { categoryStore } from '../../categories/routes';
 ticketStore.actions.getAll();
+categoryStore.actions.getAll();
 const ticketToEdit = ref(ticketStore.getters.byId(+useRoute().params.id));
 const editTicket = async (ticket: any) => {
     try {

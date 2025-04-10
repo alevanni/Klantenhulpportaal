@@ -18,8 +18,8 @@ const submit = () => {
         <table>
             <tbody>
                 <tr>
-                    <td><button @click="canc">No, I changed my mind</button></td>
-                    <td><button @click="submit">Yes, delete it</button></td>
+                    <td><button @click.prevent="canc">No, I changed my mind</button></td>
+                    <td><button @click.prevent="submit">Yes, delete it</button></td>
                 </tr>
             </tbody>
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\UpdateNoteRequest;
-use Illuminate\Http\Request;
 use App\Models\Note;
 use App\Http\Resources\NoteResource;
 
