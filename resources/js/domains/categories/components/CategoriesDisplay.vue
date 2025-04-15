@@ -2,6 +2,7 @@
 import Badge from './Badge.vue';
 
 const { categories } = defineProps(['categories']);
+
 </script>
 
 <template>

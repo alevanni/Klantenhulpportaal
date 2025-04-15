@@ -1,20 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { userStore } from '../../users/routes';
 import { goToLoginPage, register } from '../../../services/auth';
 const newUser = ref({ first_name: '', last_name: '', email: '', password: '', telephone: '' });
-/*
-const register = async (user: any) => {
-    try {
-        await userStore.actions.create(user);
-        goToLoginPage();
-    }
-    catch (e) {
-        console.log(e);
-    }
-
-
-}*/
 
 const submitNewUser = async (user: any) => {
     try {
@@ -59,5 +46,5 @@ const submitNewUser = async (user: any) => {
         </table>
     </form>
     <h6>The fields marked with * are mandatory</h6>
-    {{ newUser }}
+
 </template>

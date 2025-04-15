@@ -79,7 +79,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
 
-        if ($user->tickets()->where('status', '<', 2)->exists()) {
+        if ($user->tickets()->where('status', '<', 2)->exists() || $user->assignedTickets()->where('status', '<', 2)->exists()) {
 
             throw new HttpResponseException(response()->json([
                 'message' => 'This user has unresolved tickets, you cannot delete them!!'
@@ -88,6 +88,8 @@ class UserController extends Controller
         foreach ($user->tickets as $ticket) {
             $ticket->categories()->detach();
         }
+        $user->comments()->delete();
+        $user->notes()->delete();
         $user->tickets()->delete();
         $user->delete();
         return response()->json(["message" => "User successfully deleted"], 200);

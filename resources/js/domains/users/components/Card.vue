@@ -4,7 +4,7 @@ import EditForm from './EditForm.vue';
 import { userStore } from '../routes';
 import DeletionForm from './DeletionForm.vue';
 import { formModal } from '../../../services/modal';
-import { ticketStore, getAllTickets } from '../../tickets/routes';
+import { reload } from '../../../services/router';
 const { user } = defineProps(['user']);
 const edit = ref(0);
 
@@ -26,7 +26,8 @@ const updateUser = async (user: any) => {
 const deleteUser = async (id: number) => {
     try {
         await userStore.actions.delete(id);
-        // define a reload action
+
+        reload();
     }
     catch (e) {
         console.log(e);
@@ -47,7 +48,7 @@ const deleteUser = async (id: number) => {
         <td class="table-telephone">{{ user.telephone }}</td>
         <td class="table-button">
             <button class="edit-link" @click="editUser">&#128393; Edit User</button>
-            <button class="edit-link" @click="formModal(user.id, DeletionForm, deleteUser)"> &#128465; Delete
+            <button class="delete-link" @click="formModal(user.id, DeletionForm, deleteUser)"> &#128465; Delete
                 User</button>
         </td>
     </tr>

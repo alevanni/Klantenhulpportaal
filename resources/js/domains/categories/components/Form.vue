@@ -21,5 +21,5 @@ const submitCategoryForm = () => {
             </tbody>
         </table>
     </form>
-    {{ categoryCopy }}
+
 </template>

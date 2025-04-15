@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import Form from '../components/Form.vue';
 import { categoryStore } from '../routes';
 import { goToOverviewPage } from '../../../services/router';

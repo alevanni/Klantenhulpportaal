@@ -6,7 +6,7 @@ const commentCopy = ref({ ...comment });
 
 const emit = defineEmits(['submitComment', 'close']);
 
-const submitForm = (ticket: any) => {
+const submitForm = () => {
     emit('submitComment', commentCopy.value);
 
 }

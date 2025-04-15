@@ -26,7 +26,7 @@ class UpdateUserRequest extends FormRequest
             'id' => 'required',
             'firstName' => 'required|max:30|alpha',
             'lastName' => 'required|max:30|alpha',
-            'email' => 'required|email:rfc,dns|unique:users,email,' . $id,
+            'email' => 'required|email|unique:users,email,' . $id,
             'telephone' => 'required|regex:/^\d{10}$/|size:10',
             'isAdmin' => 'required'
         ];

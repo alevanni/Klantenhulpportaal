@@ -18,7 +18,6 @@ class Category extends Model
         'name',
 
     ];
-    protected $touches = ['tickets'];
 
     public function tickets()
     {

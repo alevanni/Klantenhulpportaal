@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import { isLoggedIn, checkIfLoggedIn, getLoggedInUser } from '../../../services/auth';
+import { getLoggedInUser } from '../../../services/auth';
 import { ticketStore, getAllTickets, myTickets } from './../routes';
 import Table from './../components/Table.vue';
-import { userStore, getAllUsers } from '../../users/routes';
-import { ref } from 'vue';
+import { userStore } from '../../users/routes';
 import { compare } from '../../../services/helpers/sort';
 import { categoryStore } from '../../categories/routes';
 ticketStore.actions.getAll();
 userStore.actions.getAll();
 categoryStore.actions.getAll();
 
-const myOwnTickets = myTickets(getLoggedInUser().id); //do it better
+const myOwnTickets = myTickets(getLoggedInUser().id);
 
 </script>
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { userStore, getAllUsers, getAdmins } from '../../users/routes';
+import { getAdmins } from '../../users/routes';
 const emit = defineEmits(['assign_user']);
 const { ticket } = defineProps(['ticket']);
 const ticketCopy = ref({ id: ticket.id, assigned_to: ticket.assigned_to, title: ticket.title, description: ticket.description });

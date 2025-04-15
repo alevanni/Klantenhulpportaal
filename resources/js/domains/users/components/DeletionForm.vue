@@ -19,7 +19,7 @@ const submit = () => {
             <tbody>
                 <tr>
                     <td><button @click.prevent="canc">No, I changed my mind</button></td>
-                    <td><button @click.prevent="submit">Yes, delete it</button></td>
+                    <td><button @click.prevent="submit">Yes, delete them</button></td>
                 </tr>
             </tbody>
 

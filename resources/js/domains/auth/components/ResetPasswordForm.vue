@@ -14,23 +14,22 @@ function submitNewPassword() {
     <form @submit.prevent="submitNewPassword">
         <table>
             <tbody>
-            <tr>
-                <td><label for="new-password">New Password:</label></td>
-                <td><input v-model="passwordCopy.password"></td>
-            </tr>
-            <tr>
-                <td><label for="confirm-password">Confirm Password:</label></td>
-                <td><input v-model="passwordCopy.password_confirmation"></td>
-            </tr>
-            <tr>
-              <td>  <input type="hidden" id="token" name="token" v-bind:value="{ token }" /> </td>
-            </tr>
-            <tr>
-                <td><input id="submit" type="submit"></td>
-            </tr>
+                <tr>
+                    <td><label for="new-password">New Password:</label></td>
+                    <td><input v-model="passwordCopy.password"></td>
+                </tr>
+                <tr>
+                    <td><label for="confirm-password">Confirm Password:</label></td>
+                    <td><input v-model="passwordCopy.password_confirmation"></td>
+                </tr>
+                <tr>
+                    <td> <input type="hidden" id="token" name="token" v-bind:value="{ token }" /> </td>
+                </tr>
+                <tr>
+                    <td><input id="submit" type="submit"></td>
+                </tr>
             </tbody>
         </table>
     </form>
-    {{ token }}
-    {{ user }}
+
 </template>

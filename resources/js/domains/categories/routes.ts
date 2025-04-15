@@ -16,11 +16,9 @@ export const categoryStore = storeModuleFactory<Category>(
 export const categoryRoutes = [
     createOverviewRoute(CATEGORIES_DOMAIN_NAME, Overview),
     createCreateRoute(CATEGORIES_DOMAIN_NAME, Create),
-    //createShowRoute(TICKETS_DOMAIN_NAME, Show),
     createEditRoute(CATEGORIES_DOMAIN_NAME, Edit),
 ];
 
-//categoryStore.actions.getAll();
 const categories = categoryStore.getters.all;
 
 export const getAllCategories = categoryStore.getters.all;

@@ -46,7 +46,7 @@ const deleteNote = async (id: number) => {
                     Intl.DateTimeFormat("en-GB").format(new Date(note.created_on)) }} </span>: {{ note.body
                 }}<button v-if="note.created_by === getLoggedInUser().id" class="edit-link" @click="editNote">&#128393; Edit
                 </button>
-                <button v-if="note.created_by === getLoggedInUser().id" class="edit-link" @click="deleteNote(note.id)"> &#128465;  Delete 
+                <button v-if="note.created_by === getLoggedInUser().id" class="delete-link" @click="deleteNote(note.id)"> &#128465;  Delete 
                     </button></td>
         <td v-else>
             <NoteForm :note="note" @submit-note="updateNote" @close="closeForm()"></NoteForm>

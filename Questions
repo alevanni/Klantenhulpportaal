@@ -1,4 +1,9 @@
--   I can also authorize the user through the request, should I do it?
+-   I can also authorize the user through the request, in the ''authorize'' function, should I do it?
+-   do i have to cancel the comments and notes on deleted tickets when i delete the users?
+
+---
+
+-   can i delete admins? what happens to tickets assigned to them?
 -   where should the fetching action go? (solved)
 -   In the new assignements there is the directive of always pulling out the complete set of data from the backend, but in the service folder that I used, the store updates by id (fine as it was)
 -   Exceptions? (I used them)

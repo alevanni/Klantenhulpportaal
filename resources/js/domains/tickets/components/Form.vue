@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import { getAllCategories, getAllButCategories, categoryStore } from '../../categories/routes';
+import { getAllButCategories, categoryStore } from '../../categories/routes';
 const { ticket } = defineProps(['ticket']);
 const ticketCopy = ref({ ...ticket });
-//ticketCopy.value.categories = [];
+
 const emit = defineEmits(['ticketSubmit']);
 
 const submitForm = () => {
@@ -46,5 +46,5 @@ const submitForm = () => {
         </table>
     </form>
 
-    {{ ticketCopy }}
+
 </template>

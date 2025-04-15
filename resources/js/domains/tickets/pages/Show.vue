@@ -3,6 +3,7 @@ import { useRoute } from 'vue-router';
 import { ticketStore } from './../routes';
 import { compare } from '../../../services/helpers/sort';
 import { userStore } from '../../users/routes';
+import { categoryStore } from '../../categories/routes';
 import { getLoggedInUser, isAdmin } from '../../../services/auth';
 import { commentsByTicketId, commentStore } from '../../comments/routes';
 import { notesByTicketId, noteStore } from '../../notes/routes';
@@ -15,6 +16,7 @@ import StatusForm from '../components/StatusForm.vue';
 import CommentForm from '../../comments/components/CommentForm.vue';
 import { ref } from 'vue';
 
+categoryStore.actions.getAll();
 ticketStore.actions.getAll();
 userStore.actions.getAll();
 commentStore.actions.getAll();
@@ -44,7 +46,7 @@ const addComment = async (comment: any) => {
         await commentStore.actions.create(comment);
 
         commentKey.value = commentKey.value + 1;
-        //console.log(key);
+
     }
     catch (e) {
         console.log(e);
@@ -56,7 +58,7 @@ const addNote = async (note: any) => {
         await noteStore.actions.create(note);
 
         noteKey.value = noteKey.value + 1;
-        //console.log(key);
+
     }
     catch (e) {
         console.log(e);

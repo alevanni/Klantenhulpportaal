@@ -53,8 +53,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Ticket::class, 'created_by');
     }
+    public function assignedTickets()
+    {
+        return $this->hasMany(Ticket::class, 'assigned_to');
+    }
     public function comments()
     {
         return $this->hasMany(Comment::class, 'created_by');
+    }
+    public function notes()
+    {
+        return $this->hasMany(Note::class, 'created_by');
     }
 }

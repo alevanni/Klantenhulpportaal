@@ -107,3 +107,7 @@ const onPage = (pageName: string) =>
 
 /** go back one page */
 export const goBack = () => router.back();
+
+/** reloads the page */
+
+export const reload = () => location.reload();

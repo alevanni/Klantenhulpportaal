@@ -61,7 +61,7 @@ class CommentController extends Controller
 
             Mail::to($creator)->send(new NewComment($ticket, $comment, $sender, $creator));
         }
-
+        $ticket->touch();
         return new CommentResource($comment);
     }
 

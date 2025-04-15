@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { isAdmin } from '../../../services/auth';
-
 import Table from './../components/Table.vue';
 import { userStore, getAllUsers } from '../../users/routes';
+
 userStore.actions.getAll();
 
 </script>

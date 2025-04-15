@@ -75,7 +75,7 @@ class TicketController extends Controller
         if ($request['status'] !== null) {
             $validated['status'] = $request['status'];
         }
-        $ticket->update($validated);
+
 
         // The form has a category field
         if ($request['categories'] !== null) {
@@ -85,7 +85,9 @@ class TicketController extends Controller
                 $catIds = array_column($request['categories'], 'id');
             }
             $ticket->categories()->sync($catIds);
+            $ticket->touch();
         }
+        $ticket->update($validated);
 
         return new TicketResource($ticket);
     }

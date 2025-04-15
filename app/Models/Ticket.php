@@ -36,6 +36,10 @@ class Ticket extends Model
     }
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class, 'ticket_id');
+    }
+    public function notes()
+    {
+        return $this->hasMany(Note::class, 'ticket_id');
     }
 }
