@@ -21,7 +21,8 @@ const { ticket } = defineProps(['ticket']);
             userStore.getters.byId(ticket.created_by).value?.lastName }}</td>
         <td>{{ new Intl.DateTimeFormat("en-GB").format(new Date(ticket.created_on)) }}</td>
         <td>{{ new Intl.DateTimeFormat("en-GB").format(new Date(ticket.updated_on)) }}</td>
-        <td>{{ userStore.getters.byId(ticket.assigned_to).value?.firstName + ' ' +
-            userStore.getters.byId(ticket.assigned_to).value?.lastName }}</td>
+        <td>{{ (userStore.getters.byId(ticket.assigned_to).value?.firstName) ?
+            userStore.getters.byId(ticket.assigned_to).value?.firstName + ' ' +
+            userStore.getters.byId(ticket.assigned_to).value?.lastName : "Not assigned yet" }}</td>
     </tr>
 </template>
